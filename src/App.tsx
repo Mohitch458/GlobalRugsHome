@@ -19,7 +19,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <BrowserRouter basename="/GlobalRugsHome/">
         <Navbar />
         <Routes>
           <Route path="/" element={<Index />} />
