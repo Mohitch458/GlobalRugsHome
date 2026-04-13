@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Image as ImageIcon, X } from 'lucide-react';
 import StarRating from '@/components/ui/StarRating';
 import { getReviews, addReview, getAuthenticatedUser, type Review, type User } from '@/lib/storage';
+import { getImageUrl } from '@/lib/utils';
 import { toast } from '@/hooks/use-toast';
 
 const Reviews = () => {
@@ -148,7 +149,7 @@ const Reviews = () => {
                         <div className="flex flex-wrap gap-2 mb-3">
                           {media.map((img, i) => (
                             <div key={i} className="relative w-16 h-16 rounded overflow-hidden group">
-                              <img src={img} alt="upload" className="w-full h-full object-cover" />
+                              <img src={getImageUrl(img)} alt="upload" className="w-full h-full object-cover" />
                               <button
                                 type="button"
                                 onClick={() => removeMedia(i)}
@@ -238,7 +239,7 @@ const Reviews = () => {
                         <div className="flex flex-wrap gap-2 mt-4">
                           {review.media.map((img, i) => (
                             <div key={i} className="w-20 h-20 rounded overflow-hidden">
-                              <img src={img} alt={`Review photo ${i+1}`} className="w-full h-full object-cover" />
+                              <img src={getImageUrl(img)} alt={`Review photo ${i+1}`} className="w-full h-full object-cover" />
                             </div>
                           ))}
                         </div>

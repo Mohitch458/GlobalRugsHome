@@ -48,7 +48,7 @@ const USER_AUTH_KEY = 'luxuryrugs_user_auth';
 // Default admin credentials
 const DEFAULT_ADMIN: AdminUser = {
   username: 'admin',
-  password: 'luxury2024'
+  password: 'GlobalRugsHome@2026'
 };
 
 // Initialize admin if not exists
@@ -88,7 +88,7 @@ export const registerUser = (name: string, email: string, password: string): Use
   if (users.find(u => u.email === email)) {
     return null; // User already exists
   }
-  
+
   const newUser: User = {
     id: Date.now().toString(),
     name,
@@ -96,7 +96,7 @@ export const registerUser = (name: string, email: string, password: string): Use
     password,
     createdAt: new Date().toISOString()
   };
-  
+
   users.push(newUser);
   localStorage.setItem(USERS_KEY, JSON.stringify(users));
   return newUser;
@@ -105,7 +105,7 @@ export const registerUser = (name: string, email: string, password: string): Use
 export const loginUser = (email: string, password: string): User | null => {
   const users = getUsers();
   const user = users.find(u => u.email === email && u.password === password);
-  
+
   if (user) {
     const { password: _, ...userWithoutPassword } = user;
     localStorage.setItem(USER_AUTH_KEY, JSON.stringify(userWithoutPassword));
@@ -154,7 +154,7 @@ export const updateProduct = (id: string, updates: Partial<Product>): Product | 
   const products = getProducts();
   const index = products.findIndex(p => p.id === id);
   if (index === -1) return null;
-  
+
   products[index] = { ...products[index], ...updates };
   localStorage.setItem(PRODUCTS_KEY, JSON.stringify(products));
   return products[index];
@@ -164,7 +164,7 @@ export const deleteProduct = (id: string): boolean => {
   const products = getProducts();
   const filtered = products.filter(p => p.id !== id);
   if (filtered.length === products.length) return false;
-  
+
   localStorage.setItem(PRODUCTS_KEY, JSON.stringify(filtered));
   return true;
 };

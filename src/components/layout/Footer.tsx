@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Instagram, Facebook, Twitter, Mail, Phone, MapPin } from 'lucide-react';
+import logoImg from '@/assets/logo.png';
 
 const Footer = () => {
   return (
@@ -9,10 +10,20 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link to="/" className="inline-block mb-6">
-              <span className="font-serif text-3xl tracking-wide">
-                GLOBALRUGS<span className="text-gold">HOME</span>
-              </span>
+            <Link to="/" className="flex items-center gap-3 mb-6">
+              <img 
+                src={logoImg} 
+                alt="GlobalRugsHome Logo" 
+                className="h-12 w-auto object-contain rounded-sm"
+              />
+              <div className="flex flex-col">
+                <span className="font-serif text-2xl tracking-wide leading-none">
+                  GLOBAL RUG <span className="text-gold">HOME</span>
+                </span>
+                <span className="text-[10px] tracking-widest uppercase mt-1 text-ivory/70">
+                  Find Your Perfect Floor
+                </span>
+              </div>
             </Link>
             <p className="text-ivory/70 font-sans text-sm leading-relaxed mb-6">
               Curating the world's finest handcrafted rugs since 1985. Each piece tells a story of tradition, artistry, and timeless elegance.

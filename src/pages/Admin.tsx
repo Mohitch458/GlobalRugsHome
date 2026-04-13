@@ -13,6 +13,7 @@ import {
   initializeAdmin,
   type Product
 } from '@/lib/storage';
+import { getImageUrl } from '@/lib/utils';
 import { toast } from '@/hooks/use-toast';
 
 const Admin = () => {
@@ -395,7 +396,7 @@ const Admin = () => {
                   <div className="w-20 h-20 bg-muted flex-shrink-0 overflow-hidden">
                     {product.images[0] ? (
                       <img
-                        src={product.images[0]}
+                        src={getImageUrl(product.images[0])}
                         alt={product.name}
                         className="w-full h-full object-cover"
                       />

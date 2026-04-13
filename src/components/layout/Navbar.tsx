@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, User as UserIcon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getAuthenticatedUser, logoutUser, type User } from '@/lib/storage';
+import logoImg from '@/assets/logo.png';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -51,12 +52,24 @@ const Navbar = () => {
       >
         <div className="container-luxury flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            <span className={`font-serif text-2xl md:text-3xl tracking-wide transition-colors duration-300 ${
-              !useLightText ? 'text-foreground' : 'text-primary-foreground'
-            }`}>
-              GlobalRugs<span className="text-gold">Home</span>
-            </span>
+          <Link to="/" className="flex items-center gap-3">
+            <img 
+              src={logoImg} 
+              alt="GlobalRugsHome Logo" 
+              className="h-10 md:h-12 w-auto object-contain rounded-sm"
+            />
+            <div className="flex flex-col">
+              <span className={`font-serif text-xl md:text-2xl tracking-wide leading-none transition-colors duration-300 ${
+                !useLightText ? 'text-foreground' : 'text-primary-foreground'
+              }`}>
+                Global Rug <span className="text-gold">Home</span>
+              </span>
+              <span className={`text-[10px] md:text-xs tracking-widest uppercase mt-1 transition-colors duration-300 ${
+                !useLightText ? 'text-foreground/70' : 'text-primary-foreground/70'
+              }`}>
+                Find Your Perfect Floor
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}

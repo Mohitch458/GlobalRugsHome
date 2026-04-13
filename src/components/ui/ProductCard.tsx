@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { getImageUrl } from '@/lib/utils';
 import type { Product } from '@/lib/storage';
 
 interface ProductCardProps {
@@ -20,13 +21,13 @@ const ProductCard = ({ product, index = 0 }: ProductCardProps) => {
           {/* Image Container */}
           <div className="img-hover-zoom aspect-[4/5] bg-muted relative">
             <img
-              src={product.images[0]}
+              src={getImageUrl(product.images[0])}
               alt={product.name}
               className={`w-full h-full object-cover transition-opacity duration-700 ease-in-out ${product.images.length > 1 ? 'group-hover:opacity-0' : ''}`}
             />
             {product.images.length > 1 && (
               <img
-                src={product.images[1]}
+                src={getImageUrl(product.images[1])}
                 alt={`${product.name} alternate view`}
                 className="w-full h-full object-cover absolute top-0 left-0 opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100"
               />

@@ -3,17 +3,20 @@ import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ExternalLink, Check } from 'lucide-react';
 import { getProduct, type Product } from '@/lib/storage';
+import { getImageUrl } from '@/lib/utils';
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const [selectedImage, setSelectedImage] = useState(0);
+  const [activePrice, setActivePrice] = useState<number | null>(null);
 
   useEffect(() => {
     if (id) {
       const foundProduct = getProduct(id);
       if (foundProduct) {
         setProduct(foundProduct);
+        setActivePrice(foundProduct.price);
       }
     }
   }, [id]);
@@ -36,6 +39,23 @@ const ProductDetail = () => {
     { label: 'Size', value: product.size },
     { label: 'Category', value: product.category },
   ];
+
+  const parseVariants = (desc: string) => {
+    if (!desc.includes("Available Sizes & Pricing:")) return null;
+    const parts = desc.split("Available Sizes & Pricing:");
+    const variantsText = parts[1].trim();
+    const lines = variantsText.split('\n').filter(l => l.trim().startsWith('-'));
+    return lines.map(line => {
+      const match = line.match(/^-\s+(.+?):\s+\$([\d,.]+)/);
+      if (match) {
+        return { name: match[1], price: parseFloat(match[2].replace(/,/g, '')) };
+      }
+      return null;
+    }).filter(Boolean) as { name: string, price: number }[];
+  };
+
+  const variants = parseVariants(product.description);
+  const displayDescription = variants ? product.description.split("Available Sizes & Pricing:")[0].trim() : product.description;
 
   return (
     <main className="pt-24 pb-20">
@@ -65,7 +85,7 @@ const ProductDetail = () => {
           >
             <div className="img-hover-zoom aspect-square bg-muted mb-4 overflow-hidden">
               <img
-                src={product.images[selectedImage]}
+                src={getImageUrl(product.images[selectedImage])}
                 alt={product.name}
                 className="w-full h-full object-cover"
               />
@@ -83,7 +103,7 @@ const ProductDetail = () => {
                     }`}
                   >
                     <img
-                      src={image}
+                      src={getImageUrl(image)}
                       alt={`${product.name} ${index + 1}`}
                       className="w-full h-full object-cover"
                     />
@@ -108,12 +128,35 @@ const ProductDetail = () => {
             <div className="gold-line mb-6" />
             
             <p className="font-serif text-3xl text-foreground mb-8">
-              ${product.price.toLocaleString()}
+              ${(activePrice ?? product.price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </p>
 
-            <p className="font-sans text-muted-foreground leading-relaxed mb-8">
-              {product.description}
+            <p className="font-sans text-muted-foreground leading-relaxed mb-6 whitespace-pre-line">
+              {displayDescription}
             </p>
+
+            {variants && variants.length > 0 && (
+              <div className="mb-8">
+                <label className="font-sans text-xs tracking-luxury uppercase text-muted-foreground block mb-2">
+                  Select Size
+                </label>
+                <div className="relative">
+                  <select 
+                    onChange={(e) => setActivePrice(Number(e.target.value))}
+                    className="w-full appearance-none bg-muted border border-border px-4 py-3 font-sans text-sm text-foreground focus:outline-none focus:border-gold transition-colors cursor-pointer"
+                  >
+                    {variants.map(v => (
+                      <option key={v.name} value={v.price}>
+                        {v.name}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-muted-foreground">
+                    <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Features */}
             <div className="border-t border-b border-border py-6 mb-8">
