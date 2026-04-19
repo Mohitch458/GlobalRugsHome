@@ -12,6 +12,7 @@ import Reviews from "./pages/Reviews";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
+import History from "./pages/History";
 import { useEffect } from "react";
 import { getProducts, addProduct, updateProduct } from "@/lib/storage";
 
@@ -104,6 +105,7 @@ Available Sizes & Pricing:
             <Route path="/reviews" element={<Reviews />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/history" element={<History />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -54,6 +54,14 @@ const Footer = () => {
           <div>
             <h4 className="font-serif text-lg mb-6">Explore</h4>
             <ul className="space-y-3">
+              <li>
+                <Link
+                  to="/history"
+                  className="text-ivory/70 hover:text-gold transition-colors font-sans text-sm"
+                >
+                  History
+                </Link>
+              </li>
               {['Collection', 'New Arrivals', 'Bestsellers', 'Custom Orders'].map((item) => (
                 <li key={item}>
                   <Link
