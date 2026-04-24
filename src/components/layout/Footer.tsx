@@ -13,7 +13,7 @@ const Footer = () => {
             <Link to="/" className="flex items-center gap-3 mb-6">
               <img 
                 src={logoImg} 
-                alt="GlobalRugsHome Logo" 
+                alt="GlobalRugHome Logo" 
                 className="h-12 w-auto object-contain rounded-sm"
               />
               <div className="flex flex-col">
@@ -124,7 +124,7 @@ const Footer = () => {
       <div className="border-t border-ivory/10">
         <div className="container-luxury py-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-ivory/50 font-sans text-xs">
-            © {new Date().getFullYear()} GlobalRugsHome. All rights reserved.
+            © {new Date().getFullYear()} GlobalRugHome. All rights reserved.
           </p>
           <div className="flex gap-6">
             <a href="#" className="text-ivory/50 hover:text-gold transition-colors font-sans text-xs">

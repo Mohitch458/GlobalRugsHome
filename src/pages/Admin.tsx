@@ -399,6 +399,7 @@ const Admin = () => {
                         src={getImageUrl(product.images[0])}
                         alt={product.name}
                         className="w-full h-full object-cover"
+                        referrerPolicy="no-referrer"
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-muted-foreground">
@@ -421,7 +422,7 @@ const Admin = () => {
                       {product.shortDescription}
                     </p>
                     <p className="font-sans text-sm text-foreground mt-1">
-                      ${product.price.toLocaleString()} · {product.category}
+                      {product.category}
                     </p>
                   </div>
                   <div className="flex items-center gap-2">

@@ -24,12 +24,14 @@ const ProductCard = ({ product, index = 0 }: ProductCardProps) => {
               src={getImageUrl(product.images[0])}
               alt={product.name}
               className={`w-full h-full object-cover transition-opacity duration-700 ease-in-out ${product.images.length > 1 ? 'group-hover:opacity-0' : ''}`}
+              referrerPolicy="no-referrer"
             />
             {product.images.length > 1 && (
               <img
                 src={getImageUrl(product.images[1])}
                 alt={`${product.name} alternate view`}
                 className="w-full h-full object-cover absolute top-0 left-0 opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100"
+                referrerPolicy="no-referrer"
               />
             )}
           </div>
@@ -45,10 +47,7 @@ const ProductCard = ({ product, index = 0 }: ProductCardProps) => {
             <p className="font-sans text-sm text-muted-foreground mb-4 line-clamp-2">
               {product.shortDescription}
             </p>
-            <div className="flex items-center justify-between">
-              <span className="font-serif text-lg text-foreground">
-                ${product.price.toLocaleString()}
-              </span>
+            <div className="flex items-center justify-end mt-2">
               <span className="font-sans text-xs tracking-luxury uppercase text-gold opacity-0 group-hover:opacity-100 transition-opacity">
                 View Details →
               </span>

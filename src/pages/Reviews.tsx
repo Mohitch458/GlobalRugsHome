@@ -115,7 +115,7 @@ const Reviews = () => {
                   Share Your Experience
                 </h2>
                 <p className="font-sans text-sm text-muted-foreground mb-6">
-                  We'd love to hear about your GlobalRugsHome experience.
+                  We'd love to hear about your GlobalRugHome experience.
                 </p>
                 
                 {user ? (
@@ -149,7 +149,7 @@ const Reviews = () => {
                         <div className="flex flex-wrap gap-2 mb-3">
                           {media.map((img, i) => (
                             <div key={i} className="relative w-16 h-16 rounded overflow-hidden group">
-                              <img src={getImageUrl(img)} alt="upload" className="w-full h-full object-cover" />
+                              <img src={getImageUrl(img)} alt="upload" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                               <button
                                 type="button"
                                 onClick={() => removeMedia(i)}
@@ -239,7 +239,7 @@ const Reviews = () => {
                         <div className="flex flex-wrap gap-2 mt-4">
                           {review.media.map((img, i) => (
                             <div key={i} className="w-20 h-20 rounded overflow-hidden">
-                              <img src={getImageUrl(img)} alt={`Review photo ${i+1}`} className="w-full h-full object-cover" />
+                              <img src={getImageUrl(img)} alt={`Review photo ${i+1}`} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                             </div>
                           ))}
                         </div>

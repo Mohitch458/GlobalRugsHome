@@ -22,7 +22,7 @@ const BrandStory = () => {
             <div className="gold-line mb-8" />
             <div className="space-y-5 font-sans text-muted-foreground leading-relaxed">
               <p>
-                For nearly four decades, GlobalRugsHome has been the destination for discerning 
+                For nearly four decades, GlobalRugHome has been the destination for discerning 
                 collectors seeking the world's finest handcrafted rugs. Our journey began 
                 in a small workshop, where a passion for textile artistry ignited a 
                 commitment to preserving ancient weaving traditions.

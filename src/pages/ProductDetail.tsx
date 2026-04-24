@@ -88,6 +88,7 @@ const ProductDetail = () => {
                 src={getImageUrl(product.images[selectedImage])}
                 alt={product.name}
                 className="w-full h-full object-cover"
+                referrerPolicy="no-referrer"
               />
             </div>
             {product.images.length > 1 && (
@@ -106,6 +107,7 @@ const ProductDetail = () => {
                       src={getImageUrl(image)}
                       alt={`${product.name} ${index + 1}`}
                       className="w-full h-full object-cover"
+                      referrerPolicy="no-referrer"
                     />
                   </button>
                 ))}
@@ -127,9 +129,7 @@ const ProductDetail = () => {
             </h1>
             <div className="gold-line mb-6" />
             
-            <p className="font-serif text-3xl text-foreground mb-8">
-              ${(activePrice ?? product.price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-            </p>
+
 
             <p className="font-sans text-muted-foreground leading-relaxed mb-6 whitespace-pre-line">
               {displayDescription}
