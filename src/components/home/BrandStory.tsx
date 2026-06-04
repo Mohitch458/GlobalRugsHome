@@ -4,7 +4,7 @@ const BrandStory = () => {
   return (
     <section className="section-padding bg-gradient-warm">
       <div className="container-luxury">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-16 items-center">
           {/* Text Content */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -15,7 +15,7 @@ const BrandStory = () => {
             <span className="font-sans text-xs tracking-luxury uppercase text-gold mb-4 block">
               Our Heritage
             </span>
-            <h2 className="font-serif text-4xl md:text-5xl text-foreground mb-6 leading-tight">
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-foreground mb-6 leading-tight">
               A Legacy of 
               <span className="block italic text-warm-brown">Master Craftsmanship</span>
             </h2>
@@ -48,7 +48,7 @@ const BrandStory = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="grid grid-cols-2 gap-6"
+            className="grid grid-cols-2 gap-4 sm:gap-6"
           >
             {[
               { number: '38+', label: 'Years of Excellence' },
@@ -62,12 +62,12 @@ const BrandStory = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-background p-8 text-center shadow-soft"
+                className="bg-background p-4 sm:p-6 md:p-8 text-center shadow-soft"
               >
-                <span className="font-serif text-4xl md:text-5xl text-gold block mb-2">
+                <span className="font-serif text-3xl sm:text-4xl md:text-5xl text-gold block mb-2">
                   {stat.number}
                 </span>
-                <span className="font-sans text-sm text-muted-foreground tracking-wide">
+                <span className="font-sans text-xs sm:text-sm text-muted-foreground tracking-wide">
                   {stat.label}
                 </span>
               </motion.div>

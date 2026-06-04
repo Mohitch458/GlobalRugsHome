@@ -31,7 +31,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4 }}
-          className="font-serif text-5xl md:text-6xl lg:text-7xl font-medium leading-tight mb-6 max-w-4xl mx-auto"
+          className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-tight mb-6 max-w-4xl mx-auto px-4"
         >
           Where Artistry Meets
           <span className="block italic text-gold-muted">Timeless Elegance</span>
@@ -41,7 +41,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6 }}
-          className="font-sans text-lg md:text-xl text-primary-foreground/80 max-w-2xl mx-auto mb-10 leading-relaxed"
+          className="font-sans text-base sm:text-lg md:text-xl text-primary-foreground/80 max-w-2xl mx-auto mb-10 leading-relaxed px-4"
         >
           Discover our curated collection of handwoven masterpieces, 
           where centuries of tradition meet contemporary sophistication.
@@ -51,14 +51,14 @@ const Hero = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.8 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full px-6"
         >
-          <Link to="/products" className="btn-luxury-gold">
+          <Link to="/products" className="btn-luxury-gold w-full sm:w-auto max-w-[280px] sm:max-w-none text-center">
             Explore Collection
           </Link>
           <Link 
             to="/reviews" 
-            className="btn-luxury-outline border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+            className="btn-luxury-outline w-full sm:w-auto max-w-[280px] sm:max-w-none text-center border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground hover:text-primary"
           >
             Read Reviews
           </Link>

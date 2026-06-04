@@ -29,6 +29,17 @@ const Navbar = () => {
     setUser(getAuthenticatedUser());
   }, [location]);
 
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
+    return () => {
+      document.body.classList.remove('overflow-hidden');
+    };
+  }, [isMobileMenuOpen]);
+
   const handleLogout = () => {
     logoutUser();
     setUser(null);
@@ -148,7 +159,7 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-background pt-24"
+            className="fixed inset-0 z-40 bg-background pt-24 pb-8 overflow-y-auto"
           >
             <div className="container-luxury flex flex-col items-center gap-8 py-12">
               {navLinks.map((link, index) => (

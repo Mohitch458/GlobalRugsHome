@@ -15,7 +15,7 @@ const CallToAction = () => {
           <span className="font-sans text-xs tracking-luxury uppercase text-gold mb-4 block">
             Begin Your Journey
           </span>
-          <h2 className="font-serif text-4xl md:text-5xl text-foreground mb-6 leading-tight">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-foreground mb-6 leading-tight">
             Find Your Perfect
             <span className="block italic text-warm-brown">Heirloom Piece</span>
           </h2>
@@ -23,11 +23,11 @@ const CallToAction = () => {
             Every rug tells a story. Let us help you discover the piece that 
             will become a cherished part of your home's narrative for generations to come.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/products" className="btn-luxury-gold">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full px-6">
+            <Link to="/products" className="btn-luxury-gold w-full sm:w-auto max-w-[280px] sm:max-w-none text-center">
               Browse Collection
             </Link>
-            <Link to="/reviews" className="btn-luxury-outline">
+            <Link to="/reviews" className="btn-luxury-outline w-full sm:w-auto max-w-[280px] sm:max-w-none text-center">
               Read Reviews
             </Link>
           </div>

@@ -25,17 +25,17 @@ const Products = () => {
         <div className="container-luxury max-w-6xl mx-auto px-4 relative z-10">
           
           {/* Titles */}
-          <div className="flex justify-center relative z-30 pointer-events-none mb-[-60px] md:mb-[-100px]">
+          <div className="flex justify-center relative z-30 pointer-events-none mb-[-40px] sm:mb-[-60px] md:mb-[-100px]">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-center bg-background/60 backdrop-blur-xl px-12 md:px-20 py-8 md:py-10 rounded-[3rem] border border-border shadow-[0_8px_32px_rgba(0,0,0,0.04)]"
+              className="text-center bg-background/60 backdrop-blur-xl px-6 py-6 sm:px-12 md:px-20 sm:py-8 md:py-10 rounded-[2rem] sm:rounded-[3rem] border border-border shadow-[0_8px_32px_rgba(0,0,0,0.04)] mx-4"
             >
-              <h1 className="font-serif text-6xl md:text-8xl lg:text-[110px] text-foreground leading-none tracking-tight">
+              <h1 className="font-serif text-5xl sm:text-7xl md:text-8xl lg:text-[110px] text-foreground leading-none tracking-tight">
                 Rugs
               </h1>
-              <h2 className="font-serif text-5xl md:text-7xl lg:text-[90px] text-foreground/80 -mt-2 md:-mt-6 mb-0 italic">
+              <h2 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-[90px] text-foreground/80 -mt-2 md:-mt-6 mb-0 italic">
                 Collection
               </h2>
             </motion.div>
@@ -59,11 +59,11 @@ const Products = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.2 }}
-              className="w-full md:w-[45%] lg:w-[40%] relative z-20 shadow-2xl rounded-2xl md:rounded-[2rem] overflow-hidden group"
+              className="w-full md:w-[45%] lg:w-[40%] relative z-20 shadow-2xl rounded-2xl md:rounded-[2rem] overflow-hidden group mx-4 md:mx-0"
             >
               {/* Image Gradient Overlay for subtle contrast at top */}
               <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent z-10 pointer-events-none" />
-              <img src={weavingImg} alt="Weaving loom" className="w-full h-[450px] md:h-[600px] lg:h-[650px] object-cover group-hover:scale-105 transition-transform duration-1000" />
+              <img src={weavingImg} alt="Weaving loom" className="w-full h-[280px] sm:h-[450px] md:h-[600px] lg:h-[650px] object-cover group-hover:scale-105 transition-transform duration-1000" />
             </motion.div>
 
             {/* Right Small Image (Texture) */}
@@ -78,15 +78,15 @@ const Products = () => {
           </div>
 
           {/* Bottom Text Card */}
-          <div className="flex justify-center relative z-30 -mt-12 md:-mt-20">
+          <div className="flex justify-center relative z-30 -mt-8 sm:-mt-12 md:-mt-20 mx-4">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.8 }}
-              className="text-center max-w-2xl px-8 py-8 md:py-10 bg-background/80 backdrop-blur-xl border border-border shadow-soft rounded-3xl"
+              className="text-center max-w-2xl px-6 py-6 sm:px-8 sm:py-10 bg-background/80 backdrop-blur-xl border border-border shadow-soft rounded-3xl"
             >
-              <span className="font-serif text-2xl text-gold block mb-3 italic">Speak your style</span>
-              <p className="font-sans text-sm md:text-base text-foreground/80 leading-relaxed">
+              <span className="font-serif text-xl sm:text-2xl text-gold block mb-3 italic">Speak your style</span>
+              <p className="font-sans text-xs sm:text-sm md:text-base text-foreground/80 leading-relaxed">
                 Add elegance to your customers' home and office spaces with exclusive rugs by GlobalRugHome. As a trusted curator of the finest weaves, we bring timeless luxury directly to you.
               </p>
             </motion.div>

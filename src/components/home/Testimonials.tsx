@@ -25,7 +25,7 @@ const Testimonials = () => {
           <span className="font-sans text-xs tracking-luxury uppercase text-gold mb-4 block">
             Client Stories
           </span>
-          <h2 className="font-serif text-4xl md:text-5xl mb-4">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl mb-4">
             Words of Appreciation
           </h2>
           <div className="gold-line-center mb-6" />
@@ -36,7 +36,7 @@ const Testimonials = () => {
         </motion.div>
 
         {/* Testimonials Grid */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {reviews.map((review, index) => (
             <motion.div
               key={review.id}
@@ -44,7 +44,7 @@ const Testimonials = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="relative p-8 bg-ivory/5 backdrop-blur border border-ivory/10"
+              className="relative p-6 sm:p-8 bg-ivory/5 backdrop-blur border border-ivory/10"
             >
               <Quote className="text-gold/30 mb-4" size={32} />
               <p className="font-sans text-ivory/80 leading-relaxed mb-6 italic">

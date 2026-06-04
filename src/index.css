@@ -134,7 +134,7 @@
 @layer components {
   /* Luxury Button Variants */
   .btn-luxury {
-    @apply inline-flex items-center justify-center px-8 py-3 font-sans text-sm font-medium tracking-widest uppercase transition-all duration-300 ease-out;
+    @apply inline-flex items-center justify-center px-6 py-2.5 sm:px-8 sm:py-3 font-sans text-sm font-medium tracking-widest uppercase transition-all duration-300 ease-out;
   }
 
   .btn-luxury-primary {
@@ -207,11 +207,11 @@
 
   /* Section Spacing */
   .section-padding {
-    @apply py-20 md:py-28 lg:py-32;
+    @apply py-12 md:py-24 lg:py-32;
   }
 
   .container-luxury {
-    @apply max-w-7xl mx-auto px-6 lg:px-8;
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
   /* Gold Accent Line */
