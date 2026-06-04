@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, User as UserIcon } from 'lucide-react';
+import { Menu, X, User as UserIcon, Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getAuthenticatedUser, logoutUser, type User } from '@/lib/storage';
 import logoImg from '@/assets/logo.png';
@@ -50,7 +50,9 @@ const Navbar = () => {
     { name: 'Home', path: '/' },
     { name: 'History', path: '/history' },
     { name: 'Collection', path: '/products' },
+    { name: 'Custom Orders', path: '/custom-orders' },
     { name: 'Reviews', path: '/reviews' },
+    { name: 'Contact Us', path: '/contact' },
   ];
 
   return (
@@ -68,85 +70,35 @@ const Navbar = () => {
             <img 
               src={logoImg} 
               alt="GlobalRugHome Logo" 
-              className="h-8 md:h-12 w-auto object-contain rounded-sm"
+              className="h-12 md:h-16 lg:h-20 w-auto object-contain rounded-sm"
             />
             <div className="flex flex-col">
               <span className={`font-serif text-xl md:text-2xl tracking-wide leading-none transition-colors duration-300 ${
                 !useLightText ? 'text-foreground' : 'text-primary-foreground'
               }`}>
-                Global Rug <span className="text-gold">Home</span>
+                Global Rugs <span className="text-gold">Homes</span>
               </span>
               <span className={`hidden md:block text-[10px] md:text-xs tracking-widest uppercase mt-1 transition-colors duration-300 ${
                 !useLightText ? 'text-foreground/70' : 'text-primary-foreground/70'
               }`}>
-                Find Your Perfect Floor
+                Find your perfect floor
+              </span>
+              <span className={`hidden md:block text-[9px] md:text-[10px] tracking-wider uppercase mt-0.5 transition-colors duration-300 ${
+                !useLightText ? 'text-foreground/50' : 'text-primary-foreground/50'
+              }`}>
+                Hand Tufted | Hand Crafted
               </span>
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-10">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.path}
-                className={`elegant-underline font-sans text-sm tracking-luxury uppercase transition-colors duration-300 ${
-                  !useLightText ? 'text-foreground' : 'text-primary-foreground'
-                } ${location.pathname === link.path ? 'after:scale-x-100' : ''}`}
-              >
-                {link.name}
-              </Link>
-            ))}
-            
-            {user ? (
-              <div className="flex items-center gap-4">
-                <span className={`flex items-center gap-2 font-sans text-sm ${!useLightText ? 'text-foreground' : 'text-primary-foreground'}`}>
-                  <UserIcon size={16} />
-                  {user.name}
-                </span>
-                <button
-                  onClick={handleLogout}
-                  className={`btn-luxury-outline text-xs py-2 px-5 ${
-                    !useLightText ? '' : 'border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary'
-                  }`}
-                >
-                  Logout
-                </button>
-              </div>
-            ) : (
-              <div className="flex items-center gap-4">
-                <Link
-                  to="/auth"
-                  state={{ mode: 'login' }}
-                  className={`font-sans text-sm tracking-luxury uppercase transition-colors duration-300 ${
-                    !useLightText ? 'text-foreground hover:text-gold' : 'text-primary-foreground hover:text-gold/80'
-                  }`}
-                >
-                  Sign In
-                </Link>
-                <Link
-                  to="/auth"
-                  state={{ mode: 'register' }}
-                  className={`btn-luxury-outline text-xs py-2 px-5 ${
-                    !useLightText ? '' : 'border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary'
-                  }`}
-                >
-                  Register
-                </Link>
-              </div>
-            )}
-            
-
-          </div>
-
-          {/* Mobile Menu Button */}
+          {/* Universal Hamburger Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={`md:hidden p-2 transition-colors ${
+            className={`p-2 transition-colors ${
               !useLightText ? 'text-foreground' : 'text-primary-foreground'
             }`}
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
       </nav>
@@ -171,6 +123,7 @@ const Navbar = () => {
                 >
                   <Link
                     to={link.path}
+                    onClick={() => setIsMobileMenuOpen(false)}
                     className="font-serif text-3xl text-foreground hover:text-gold transition-colors"
                   >
                     {link.name}
@@ -185,22 +138,64 @@ const Navbar = () => {
                       <UserIcon size={20} />
                       {user.name}
                     </span>
-                    <button onClick={handleLogout} className="btn-luxury-outline w-full max-w-[200px]">
+                    <button 
+                      onClick={() => { handleLogout(); setIsMobileMenuOpen(false); }} 
+                      className="btn-luxury-outline w-full max-w-[200px]"
+                    >
                       Logout
                     </button>
                   </>
                 ) : (
                   <>
-                    <Link to="/auth" state={{ mode: 'login' }} className="btn-luxury-outline w-full max-w-[200px] text-center">
+                    <Link 
+                      to="/auth" 
+                      state={{ mode: 'login' }} 
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="btn-luxury-outline w-full max-w-[200px] text-center"
+                    >
                       Sign In
                     </Link>
-                    <Link to="/auth" state={{ mode: 'register' }} className="btn-luxury-primary w-full max-w-[200px] text-center">
+                    <Link 
+                      to="/auth" 
+                      state={{ mode: 'register' }} 
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="btn-luxury-primary w-full max-w-[200px] text-center"
+                    >
                       Register
                     </Link>
                   </>
                 )}
-                
+              </div>
 
+              {/* Contact & Social Section */}
+              <div className="w-full max-w-sm px-8 mt-4 flex flex-col items-center sm:items-start text-center sm:text-left">
+                <div className="w-full h-px bg-border my-6"></div>
+                
+                <div className="flex flex-row justify-center gap-8 w-full py-2">
+                  <a href="#" className="flex items-center text-foreground/80 hover:text-gold transition-colors" aria-label="Facebook">
+                    <Facebook size={24} />
+                  </a>
+                  <a href="#" className="flex items-center text-foreground/80 hover:text-gold transition-colors" aria-label="X (Twitter)">
+                    <Twitter size={24} />
+                  </a>
+                  <a href="#" className="flex items-center text-foreground/80 hover:text-gold transition-colors" aria-label="Instagram">
+                    <Instagram size={24} />
+                  </a>
+                  <a href="#" className="flex items-center text-foreground/80 hover:text-gold transition-colors" aria-label="LinkedIn">
+                    <Linkedin size={24} />
+                  </a>
+                </div>
+
+                <div className="w-full h-px bg-border my-6"></div>
+
+                <div className="flex flex-col gap-4 w-full">
+                  <a href="mailto:hello@globalrugshome.com" className="font-sans text-sm text-foreground/80 hover:text-gold transition-colors">
+                    hello@globalrugshome.com
+                  </a>
+                  <a href="#" className="font-sans text-sm text-foreground/80 hover:text-gold transition-colors">
+                    Chat With Us On Whatsapp
+                  </a>
+                </div>
               </div>
             </div>
           </motion.div>

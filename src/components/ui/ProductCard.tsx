@@ -38,9 +38,6 @@ const ProductCard = ({ product, index = 0 }: ProductCardProps) => {
 
           {/* Content */}
           <div className="p-6">
-            <span className="font-sans text-xs tracking-luxury uppercase text-muted-foreground mb-2 block">
-              {product.category}
-            </span>
             <h3 className="font-serif text-xl text-foreground mb-2 group-hover:text-gold transition-colors">
               {product.name}
             </h3>

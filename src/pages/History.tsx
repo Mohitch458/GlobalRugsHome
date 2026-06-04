@@ -12,7 +12,11 @@ const timelineEvents = [
     id: 1,
     title: "The Earliest Looms",
     period: "Pre-Mughal Roots",
-    description: "Centuries before the introduction of intricate pile carpets, India boasted a vibrant and highly refined tradition of flat-woven rugs known as dhurries. Traditionally woven by women in royal pavilions and everyday households alike, these ubiquitous floor coverings were made of cotton, wool, jute, or silk. Embellished with simple geometric shapes or local tribal motifs, they served diverse roles—ranging from daily floor bedding and prayer mats to insulation against cold earthen floors. Even then, the rich heritage of dyeing techniques using indigo, madder, and turmeric was already taking shape.",
+    description: [
+      "Centuries before the introduction of intricate pile carpets, the Indian subcontinent boasted a vibrant and highly refined tradition of flat-woven rugs known as dhurries. These ubiquitous floor coverings were integral to both daily life and royal comfort, meticulously crafted from indigenous materials like cotton, wool, jute, and occasionally silk.",
+      "Traditionally woven by women in everyday households and royal pavilions alike, these pieces were embellished with simple yet striking geometric shapes and regional tribal motifs. They served diverse functional roles—ranging from daily floor bedding and prayer mats to providing essential insulation against cold earthen floors.",
+      "Even in these early stages, a rich heritage of natural dyeing techniques was taking shape. Artisans mastered the use of local botanical extracts, utilizing indigo for deep blues, madder root for rich reds, and turmeric for vibrant yellows, laying the foundational color palettes that would define Indian textiles for centuries."
+    ],
     image: preMughalImg,
     icon: <Clock className="w-6 h-6 text-[#8B5A2B]" />,
   },
@@ -20,7 +24,11 @@ const timelineEvents = [
     id: 2,
     title: "The Golden Age of Weaving",
     period: "16th Century - The Mughal Era",
-    description: "The grand transformation of Indian carpet weaving began when the Mughal Emperor Babur lamented the absence of the luxurious Persian carpets he adored. In the 16th century, his grandson, Emperor Akbar, invited master weavers from royal Persian courts to train Indian artisans in the art of pile weaving. What began as an imitation of Persian motifs quickly evolved into an unmistakable 'Mughal Style'. This distinct aesthetic married Persian structural techniques with quintessential Indian sensibilities—showcasing ultra-realistic botanical gardens, lush florals, intricate wildlife scenes, and dynamic portrayals of imperial court life. The royal workshops in Agra, Lahore, and Delhi became epicenters of opulence.",
+    description: [
+      "The grand transformation of Indian carpet weaving began in the early 16th century when the Mughal Emperor Babur, longing for the comforts of his homeland, lamented the absence of the luxurious Persian carpets he adored. However, it was his grandson, Emperor Akbar the Great, who truly revolutionized the craft.",
+      "Akbar invited master weavers from royal Persian courts to establish imperial workshops in India, tasked with training local artisans in the complex art of pile weaving. What began as an imitation of Persian motifs quickly evolved into an unmistakable 'Mughal Style', marrying Persian structural techniques with quintessential Indian sensibilities.",
+      "This new aesthetic showcased ultra-realistic botanical gardens, lush exotic florals, intricate wildlife hunting scenes, and dynamic portrayals of imperial court life. The royal workshops situated in Agra, Lahore, and Delhi soon became epicenters of global opulence, producing masterpieces characterized by their exceptional knot density and brilliant, jewel-toned colors."
+    ],
     image: mughalEraImg,
     icon: <Crown className="w-6 h-6 text-[#DAA520]" />,
   },
@@ -28,7 +36,11 @@ const timelineEvents = [
     id: 3,
     title: "Jail Carpets & Craft Revival",
     period: "17th - 18th Century",
-    description: "To meet the empire’s insatiable demand for extravagant textiles and carpets, Emperor Akbar implemented a unique system: introducing carpet weaving into imperial prisons. High-quality raw materials alongside expert master craftsmen were brought to jails across North India to rehabilitate prisoners through art. Surprisingly, these 'jail carpets' achieved unprecedented mastery. By the 18th century, some of the most sought-after and complex carpets in the world were being woven in Agra and Yervada jails. They featured impossibly tight knots and mesmerizing designs that are still highly coveted items at auctions today.",
+    description: [
+      "To meet the empire’s insatiable and growing demand for extravagant textiles, Emperor Akbar implemented a highly unique and unprecedented system: introducing fine carpet weaving into imperial prisons. High-quality raw materials alongside expert master craftsmen were brought to jails across North India to rehabilitate prisoners through dedicated artistic labor.",
+      "Surprisingly, these 'jail carpets' achieved unprecedented mastery and became famous in their own right. Removed from commercial pressures, the captive artisans had the time to focus entirely on perfection. By the 18th century, some of the most sought-after and complex carpets in the world were being woven in the Agra and Yervada jails.",
+      "These carpets featured impossibly tight knots, immense durability, and mesmerizing, complex designs. Today, antique Indian jail carpets from this era remain highly coveted items at prestigious international auctions, celebrated for their unique history and flawless execution."
+    ],
     image: mughalEraImg, 
     icon: <Pickaxe className="w-6 h-6 text-[#5b3b1c]" />,
   },
@@ -36,7 +48,11 @@ const timelineEvents = [
     id: 4,
     title: "Global Recognition & Trade",
     period: "19th Century - Colonial Influence",
-    description: "During the British Colonial period, the demand for Indian handwoven carpets surged throughout Europe and America. While native patronage slightly dwindled due to the fall of the Mughal Empire, the Great Exhibition of 1851 in London placed Indian craftsmanship squarely on the global map. European merchants flocked to India, establishing massive commercial weaving firms in towns like Mirzapur, Amritsar, and Srinagar. Indian weavers began adapting their traditional palettes to suit Western tastes, creating a lucrative export market but risking the loss of their most ancient esoteric patterns.",
+    description: [
+      "During the British Colonial period, the dynamic of the Indian carpet industry shifted significantly. While native royal patronage slightly dwindled due to the gradual fall of the Mughal Empire, the international demand for Indian handwoven carpets surged throughout Europe and America.",
+      "The turning point came during the Great Exhibition of 1851 in London, which placed Indian craftsmanship squarely on the global map. Attendees were captivated by the intricate designs and superior quality of Indian textiles. Consequently, European merchants flocked to the subcontinent, establishing massive commercial weaving firms in strategic towns like Mirzapur, Amritsar, and Srinagar.",
+      "To cater to this booming export market, Indian weavers began adapting their traditional vibrant palettes to suit more muted Western tastes. While this commercialization created a lucrative global trade network, it also sparked a delicate balancing act to prevent the loss of their most ancient and esoteric regional patterns."
+    ],
     image: colonialEraImg,
     icon: <Globe className="w-6 h-6 text-[#4682B4]" />,
   },
@@ -44,7 +60,11 @@ const timelineEvents = [
     id: 5,
     title: "The Heart of Indian Carpets",
     period: "20th Century - Regional Hubs",
-    description: "Following India's independence, a conscious effort was made to decentralize and preserve the craft. Specific regions blossomed into legendary hubs of specialized weaving. Bhadohi, known today as the 'Carpet City of India', became the undisputed capital of the hand-knotted rug industry, responsible for millions of square feet exported annually. Meanwhile, Kashmir perfected the ultra-luxurious art of pure silk-on-silk weaving with 300+ knots per square inch. Jaipur and Panipat also rose to prominence, blending ancient dhurrie techniques with high-end wool tufting.",
+    description: [
+      "Following India's independence in 1947, a conscious and structured effort was made by the new government to decentralize, protect, and preserve the country's rich weaving craft. Specific regions across the country blossomed into legendary hubs of specialized weaving techniques.",
+      "Bhadohi and Mirzapur in Uttar Pradesh emerged as the undisputed capital of the hand-knotted rug industry, eventually earning the title 'Carpet City of India' and becoming responsible for millions of square feet exported annually worldwide. Meanwhile, artisans in Kashmir perfected the ultra-luxurious art of pure silk-on-silk weaving, achieving astounding densities of 300 to over 1000 knots per square inch.",
+      "Simultaneously, cities like Jaipur and Panipat rose to prominence by blending ancient dhurrie flat-weave techniques with high-end wool tufting, ensuring that India offered an unparalleled diversity of rug styles, textures, and price points to the global market."
+    ],
     image: modernRevivalImg, 
     icon: <MapPin className="w-6 h-6 text-[#8c1c13]" />,
   },
@@ -52,7 +72,11 @@ const timelineEvents = [
     id: 6,
     title: "Sustainable & Modern Innovation",
     period: "21st Century - Modern Revival",
-    description: "Today, India commands a dominant share of the world’s handmade carpet export market. The contemporary industry honors its roots while dynamically innovating. Emphasizing sustainability, eco-friendly organic dyes, bamboo silk, and recycled materials are frequently used alongside premium wool. Government initiatives and powerful artisan networks ensure that the millions of weavers—many of them women from deep rural communities—receive fair wages and global recognition. Modern Indian rugs now proudly fuse centuries of ancestral soul with avant-garde global aesthetics.",
+    description: [
+      "Today, India confidently commands a dominant share of the world’s handmade carpet export market. The contemporary industry is characterized by its ability to deeply honor its ancestral roots while dynamically innovating to meet modern environmental and aesthetic standards.",
+      "There is a massive, industry-wide emphasis on sustainability. Eco-friendly organic dyes, renewable bamboo silk, undyed natural wools, and recycled PET yarns are now frequently utilized alongside premium New Zealand wool. This shift ensures the craft remains environmentally responsible.",
+      "Furthermore, government initiatives and powerful artisan networks like Care & Fair ensure that the millions of weavers—many of whom are women working from deep rural communities—receive fair wages, healthcare, and global recognition. Modern Indian rugs proudly fuse centuries of ancestral soul with avant-garde, conscientious global design."
+    ],
     image: modernRevivalImg,
     icon: <Factory className="w-6 h-6 text-[#2E8B57]" />,
   }
@@ -64,7 +88,7 @@ const History = () => {
       {/* Hero Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 text-center">
         <motion.h1 
-          className="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-neutral-900 mb-6"
+          className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-neutral-900 mb-6"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -72,7 +96,7 @@ const History = () => {
           The Journey of the Handwoven Canvas
         </motion.h1>
         <motion.p 
-          className="max-w-3xl mx-auto text-lg text-neutral-600 leading-relaxed"
+          className="max-w-3xl mx-auto text-lg text-neutral-600 leading-relaxed font-sans"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -111,9 +135,11 @@ const History = () => {
                       </span>
                     </div>
                     <h3 className="text-3xl font-serif text-neutral-900 mb-5">{event.title}</h3>
-                    <p className="text-neutral-600 font-sans text-base leading-loose">
-                      {event.description}
-                    </p>
+                    <div className="text-neutral-600 font-sans text-base leading-loose space-y-4">
+                      {event.description.map((paragraph, i) => (
+                        <p key={i}>{paragraph}</p>
+                      ))}
+                    </div>
                   </motion.div>
                 </div>
 

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Instagram, Facebook, Twitter, Mail, Phone, MapPin } from 'lucide-react';
+import { Instagram, Facebook, Twitter, Mail, Phone } from 'lucide-react';
 import logoImg from '@/assets/logo.png';
 
 const Footer = () => {
@@ -14,14 +14,17 @@ const Footer = () => {
               <img 
                 src={logoImg} 
                 alt="GlobalRugHome Logo" 
-                className="h-12 w-auto object-contain rounded-sm"
+                className="h-16 md:h-20 w-auto object-contain rounded-sm"
               />
               <div className="flex flex-col">
                 <span className="font-serif text-2xl tracking-wide leading-none">
-                  GLOBAL RUG <span className="text-gold">HOME</span>
+                  GLOBAL RUGS <span className="text-gold">HOMES</span>
                 </span>
                 <span className="text-[10px] tracking-widest uppercase mt-1 text-ivory/70">
-                  Find Your Perfect Floor
+                  Find your perfect floor
+                </span>
+                <span className="text-[9px] tracking-wider uppercase mt-0.5 text-ivory/50">
+                  Hand Tufted | Hand Crafted
                 </span>
               </div>
             </Link>
@@ -62,7 +65,23 @@ const Footer = () => {
                   History
                 </Link>
               </li>
-              {['Collection', 'New Arrivals', 'Bestsellers', 'Custom Orders'].map((item) => (
+              <li>
+                <Link
+                  to="/custom-orders"
+                  className="text-ivory/70 hover:text-gold transition-colors font-sans text-sm"
+                >
+                  Custom Orders
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/contact"
+                  className="text-ivory/70 hover:text-gold transition-colors font-sans text-sm"
+                >
+                  Contact Us
+                </Link>
+              </li>
+              {['Collection', 'New Arrivals', 'Bestsellers'].map((item) => (
                 <li key={item}>
                   <Link
                     to="/products"
@@ -75,34 +94,14 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Collections */}
-          <div>
-            <h4 className="font-serif text-lg mb-6">Collections</h4>
-            <ul className="space-y-3">
-              {['Persian', 'Tribal', 'Contemporary', 'Silk', 'Kilim'].map((item) => (
-                <li key={item}>
-                  <Link
-                    to="/products"
-                    className="text-ivory/70 hover:text-gold transition-colors font-sans text-sm"
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+
+
 
           {/* Contact */}
           <div>
             <h4 className="font-serif text-lg mb-6">Contact</h4>
             <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <MapPin size={18} className="text-gold mt-1 flex-shrink-0" />
-                <span className="text-ivory/70 font-sans text-sm">
-                  123 Artisan Avenue<br />
-                  New York, NY 10001
-                </span>
-              </li>
+
               <li className="flex items-center gap-3">
                 <Phone size={18} className="text-gold flex-shrink-0" />
                 <a href="tel:+1234567890" className="text-ivory/70 hover:text-gold transition-colors font-sans text-sm">
