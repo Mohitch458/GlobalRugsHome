@@ -13,7 +13,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
           
           {/* Brand */}
-          <div className="lg:col-span-5 pr-0 lg:pr-12">
+          <div className="lg:col-span-4 pr-0 lg:pr-8">
             <Link to="/" className="flex items-center gap-4 mb-8 group inline-flex">
               <div className="relative">
                 <img 
@@ -87,7 +87,7 @@ const Footer = () => {
           </div>
 
           {/* Contact */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-3">
             <h4 className="font-serif text-xl mb-6 relative inline-block">
               Contact
               <span className="absolute -bottom-2 left-0 w-1/2 h-0.5 bg-gold"></span>
@@ -110,7 +110,7 @@ const Footer = () => {
                 </div>
                 <div>
                   <span className="block text-[10px] uppercase tracking-wider text-ivory/50 mb-1">Email Us</span>
-                  <a href="mailto:globalrughome@gmail.com" className="text-ivory/80 hover:text-gold transition-colors font-sans text-sm">
+                  <a href="mailto:globalrughome@gmail.com" className="text-ivory/80 hover:text-gold transition-colors font-sans text-sm break-all">
                     globalrughome@gmail.com
                   </a>
                 </div>
