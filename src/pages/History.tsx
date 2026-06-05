@@ -77,7 +77,7 @@ const timelineEvents = [
       "There is a massive, industry-wide emphasis on sustainability. Eco-friendly organic dyes, renewable bamboo silk, undyed natural wools, and recycled PET yarns are now frequently utilized alongside premium New Zealand wool. This shift ensures the craft remains environmentally responsible.",
       "Furthermore, government initiatives and powerful artisan networks like Care & Fair ensure that the millions of weavers—many of whom are women working from deep rural communities—receive fair wages, healthcare, and global recognition. Modern Indian rugs proudly fuse centuries of ancestral soul with avant-garde, conscientious global design."
     ],
-    image: modernRevivalImg,
+    image: import.meta.env.BASE_URL + "images/img7.png",
     icon: <Factory className="w-6 h-6 text-[#2E8B57]" />,
   }
 ];
