@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Index from "./pages/Index";
@@ -97,24 +98,25 @@ Available Sizes & Pricing:
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <Sonner />
-        <BrowserRouter basename="/GlobalRugsHome">
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/products/:id" element={<ProductDetail />} />
-            <Route path="/reviews" element={<Reviews />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/history" element={<History />} />
-            <Route path="/custom-orders" element={<CustomOrders />} />
-            <Route path="/contact" element={<Contact />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <Footer />
-        </BrowserRouter>
+        <GoogleOAuthProvider clientId="1234567890-placeholder.apps.googleusercontent.com">
+          <BrowserRouter basename="/GlobalRugsHome">
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/products/:id" element={<ProductDetail />} />
+              <Route path="/reviews" element={<Reviews />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/history" element={<History />} />
+              <Route path="/custom-orders" element={<CustomOrders />} />
+              <Route path="/contact" element={<Contact />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            <Footer />
+          </BrowserRouter>
+        </GoogleOAuthProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );

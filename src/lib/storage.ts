@@ -30,6 +30,8 @@ export interface User {
   name: string;
   email: string;
   password?: string;
+  provider?: 'local' | 'google' | 'facebook';
+  picture?: string;
   createdAt: string;
 }
 
@@ -112,6 +114,44 @@ export const loginUser = (email: string, password: string): User | null => {
     return userWithoutPassword as User;
   }
   return null;
+};
+
+export interface SocialProfile {
+  name: string;
+  email: string;
+  picture?: string;
+  provider: 'google' | 'facebook';
+}
+
+export const loginSocialUser = (profile: SocialProfile): User => {
+  const users = getUsers();
+  let user = users.find(u => u.email === profile.email);
+
+  if (user) {
+    // User exists, update social fields if missing
+    if (!user.provider || user.provider === 'local') {
+      user.provider = profile.provider;
+      user.picture = profile.picture || user.picture;
+      localStorage.setItem(USERS_KEY, JSON.stringify(users));
+    }
+  } else {
+    // Create new user
+    user = {
+      id: Date.now().toString(),
+      name: profile.name,
+      email: profile.email,
+      provider: profile.provider,
+      picture: profile.picture,
+      createdAt: new Date().toISOString()
+    };
+    users.push(user);
+    localStorage.setItem(USERS_KEY, JSON.stringify(users));
+  }
+
+  // Log in the user
+  const { password: _, ...userWithoutPassword } = user;
+  localStorage.setItem(USER_AUTH_KEY, JSON.stringify(userWithoutPassword));
+  return userWithoutPassword as User;
 };
 
 export const logoutUser = (): void => {

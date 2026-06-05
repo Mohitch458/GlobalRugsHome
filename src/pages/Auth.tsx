@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { loginUser, registerUser, loginAdmin } from '@/lib/storage';
 import { toast } from '@/hooks/use-toast';
+import { SocialLoginButtons } from '@/components/auth/SocialLoginButtons';
 
 const Auth = () => {
   const location = useLocation();
@@ -143,6 +144,21 @@ const Auth = () => {
             {isLogin ? 'Sign In' : 'Register'}
           </button>
         </form>
+
+        <div className="mt-8 relative">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t border-border" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-background px-2 text-muted-foreground tracking-luxury">
+              Or continue with
+            </span>
+          </div>
+        </div>
+
+        <div className="mt-6">
+          <SocialLoginButtons isLogin={isLogin} />
+        </div>
 
         <p className="text-center mt-6 font-sans text-sm text-muted-foreground">
           {isLogin ? "Don't have an account? " : "Already have an account? "}
