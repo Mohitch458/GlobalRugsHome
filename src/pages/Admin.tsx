@@ -15,8 +15,10 @@ import {
 } from '@/lib/storage';
 import { getImageUrl } from '@/lib/utils';
 import { toast } from '@/hooks/use-toast';
+import ManageCategories from '@/components/admin/ManageCategories';
 
 const Admin = () => {
+  const [activeTab, setActiveTab] = useState<'products' | 'categories'>('products');
   const [authenticated, setAuthenticated] = useState<boolean | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [isAddingProduct, setIsAddingProduct] = useState(false);
@@ -33,7 +35,9 @@ const Admin = () => {
     size: '',
     amazonLink: '',
     images: [''],
-    featured: false
+    featured: false,
+    showPricing: false,
+    enablePurchase: false
   });
 
   useEffect(() => {
@@ -63,7 +67,9 @@ const Admin = () => {
       size: '',
       amazonLink: '',
       images: [''],
-      featured: false
+      featured: false,
+      showPricing: false,
+      enablePurchase: false
     });
   };
 
@@ -101,7 +107,9 @@ const Admin = () => {
       size: formData.size,
       amazonLink: formData.amazonLink,
       images: formData.images.filter(img => img.trim() !== ''),
-      featured: formData.featured
+      featured: formData.featured,
+      showPricing: formData.showPricing,
+      enablePurchase: formData.enablePurchase
     };
 
     if (editingProduct) {
@@ -130,7 +138,9 @@ const Admin = () => {
       size: product.size,
       amazonLink: product.amazonLink,
       images: product.images.length > 0 ? product.images : [''],
-      featured: product.featured
+      featured: product.featured || false,
+      showPricing: product.showPricing || false,
+      enablePurchase: product.enablePurchase || false
     });
     setIsAddingProduct(true);
   };
@@ -161,19 +171,21 @@ const Admin = () => {
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="font-serif text-3xl text-foreground">Product Management</h1>
+            <h1 className="font-serif text-3xl text-foreground">Management Console</h1>
             <p className="font-sans text-sm text-muted-foreground mt-1">
-              Manage your rug collection
+              Manage your store data
             </p>
           </div>
           <div className="flex items-center gap-4">
-            <button
-              onClick={() => setIsAddingProduct(true)}
-              className="btn-luxury-gold flex items-center gap-2"
-            >
-              <Plus size={18} />
-              Add Product
-            </button>
+            {activeTab === 'products' && (
+              <button
+                onClick={() => setIsAddingProduct(true)}
+                className="btn-luxury-gold flex items-center gap-2"
+              >
+                <Plus size={18} />
+                Add Product
+              </button>
+            )}
             <button
               onClick={handleLogout}
               className="p-3 bg-background border border-border hover:border-destructive hover:text-destructive transition-colors"
@@ -183,8 +195,28 @@ const Admin = () => {
           </div>
         </div>
 
-        {/* Add/Edit Product Form */}
-        {isAddingProduct && (
+        {/* Tabs */}
+        <div className="flex gap-8 mb-8 border-b border-border">
+          <button
+            onClick={() => setActiveTab('products')}
+            className={`pb-4 font-serif text-lg transition-colors relative ${activeTab === 'products' ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
+          >
+            Products
+            {activeTab === 'products' && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gold" />}
+          </button>
+          <button
+            onClick={() => setActiveTab('categories')}
+            className={`pb-4 font-serif text-lg transition-colors relative ${activeTab === 'categories' ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
+          >
+            Categories
+            {activeTab === 'categories' && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gold" />}
+          </button>
+        </div>
+
+        {activeTab === 'products' ? (
+          <>
+            {/* Add/Edit Product Form */}
+            {isAddingProduct && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -349,17 +381,45 @@ const Admin = () => {
               </div>
 
               {/* Featured */}
-              <div className="flex items-center gap-3">
-                <input
-                  type="checkbox"
-                  id="featured"
-                  checked={formData.featured}
-                  onChange={(e) => setFormData(prev => ({ ...prev, featured: e.target.checked }))}
-                  className="w-5 h-5 accent-gold"
-                />
-                <label htmlFor="featured" className="font-sans text-sm text-foreground">
-                  Feature this product on homepage
-                </label>
+              <div className="space-y-3 bg-muted/50 p-4 rounded-lg border border-border/50">
+                <div className="flex items-center gap-3">
+                  <input
+                    type="checkbox"
+                    id="featured"
+                    checked={formData.featured}
+                    onChange={(e) => setFormData(prev => ({ ...prev, featured: e.target.checked }))}
+                    className="w-5 h-5 accent-gold"
+                  />
+                  <label htmlFor="featured" className="font-sans text-sm text-foreground">
+                    Feature this product on homepage
+                  </label>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <input
+                    type="checkbox"
+                    id="showPricing"
+                    checked={formData.showPricing}
+                    onChange={(e) => setFormData(prev => ({ ...prev, showPricing: e.target.checked }))}
+                    className="w-5 h-5 accent-gold"
+                  />
+                  <label htmlFor="showPricing" className="font-sans text-sm text-foreground">
+                    Display Pricing Publicly
+                  </label>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <input
+                    type="checkbox"
+                    id="enablePurchase"
+                    checked={formData.enablePurchase}
+                    onChange={(e) => setFormData(prev => ({ ...prev, enablePurchase: e.target.checked }))}
+                    className="w-5 h-5 accent-gold"
+                  />
+                  <label htmlFor="enablePurchase" className="font-sans text-sm text-foreground">
+                    Enable Purchase / External Links
+                  </label>
+                </div>
               </div>
 
               <div className="flex gap-4">
@@ -444,6 +504,10 @@ const Admin = () => {
             </div>
           )}
         </div>
+          </>
+        ) : (
+          <ManageCategories />
+        )}
       </div>
     </main>
   );

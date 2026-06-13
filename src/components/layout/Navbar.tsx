@@ -192,9 +192,6 @@ const Navbar = () => {
                   <a href="mailto:hello@globalrugshome.com" className="font-sans text-sm text-foreground/80 hover:text-gold transition-colors">
                     hello@globalrugshome.com
                   </a>
-                  <a href="#" className="font-sans text-sm text-foreground/80 hover:text-gold transition-colors">
-                    Chat With Us On Whatsapp
-                  </a>
                 </div>
               </div>
             </div>

@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import ScrollToTop from "@/components/layout/ScrollToTop";
 import Index from "./pages/Index";
 import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
@@ -100,6 +101,7 @@ Available Sizes & Pricing:
         <Toaster />
         <GoogleOAuthProvider clientId="1234567890-placeholder.apps.googleusercontent.com">
           <BrowserRouter basename="/GlobalRugsHome">
+            <ScrollToTop />
             <Navbar />
             <Routes>
               <Route path="/" element={<Index />} />

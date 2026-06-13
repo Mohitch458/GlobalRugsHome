@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ExternalLink, Check } from 'lucide-react';
 import { getProduct, type Product } from '@/lib/storage';
@@ -7,6 +7,7 @@ import { getImageUrl } from '@/lib/utils';
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const [product, setProduct] = useState<Product | null>(null);
   const [selectedImage, setSelectedImage] = useState(0);
   const [activePrice, setActivePrice] = useState<number | null>(null);
@@ -26,9 +27,9 @@ const ProductDetail = () => {
       <main className="pt-24 pb-20 min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="font-serif text-3xl text-foreground mb-4">Product Not Found</h1>
-          <Link to="/products" className="btn-luxury-primary">
+          <button onClick={() => navigate(-1)} className="btn-luxury-primary">
             Back to Collection
-          </Link>
+          </button>
         </div>
       </main>
     );
@@ -58,22 +59,24 @@ const ProductDetail = () => {
   const displayDescription = variants ? product.description.split("Available Sizes & Pricing:")[0].trim() : product.description;
 
   return (
-    <main className="pt-24 pb-20">
+    <main className="pt-36 md:pt-48 pb-20">
       <div className="container-luxury">
         {/* Back Link */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.4 }}
-          className="mb-8"
+          className="mb-8 md:mb-12"
         >
-          <Link
-            to="/products"
-            className="inline-flex items-center gap-2 font-sans text-sm text-muted-foreground hover:text-foreground transition-colors"
+          <button
+            onClick={() => navigate(-1)}
+            className="group inline-flex items-center gap-3 font-sans text-sm md:text-base text-muted-foreground hover:text-foreground transition-all duration-300 py-2 pr-4 rounded-lg"
           >
-            <ArrowLeft size={16} />
-            Back to Collection
-          </Link>
+            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-neutral-100 group-hover:bg-gold/10 group-hover:text-gold transition-colors duration-300">
+              <ArrowLeft size={16} className="transform group-hover:-translate-x-0.5 transition-transform duration-300" />
+            </span>
+            <span className="font-medium tracking-wide uppercase text-xs md:text-sm">Back to Collection</span>
+          </button>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
@@ -129,13 +132,30 @@ const ProductDetail = () => {
             </h1>
             <div className="gold-line mb-6" />
             
-
+            {product.showPricing && (
+              <div className="flex items-end gap-4 mb-6">
+                {product.salePrice ? (
+                  <>
+                    <span className="font-serif text-3xl md:text-4xl text-red-600 font-medium">
+                      ${(activePrice || product.salePrice).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    </span>
+                    <span className="font-sans text-lg md:text-xl text-muted-foreground line-through">
+                      ${product.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    </span>
+                  </>
+                ) : (
+                  <span className="font-serif text-3xl md:text-4xl text-foreground font-medium">
+                    ${(activePrice || product.price).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  </span>
+                )}
+              </div>
+            )}
 
             <p className="font-sans text-muted-foreground leading-relaxed mb-6 whitespace-pre-line">
               {displayDescription}
             </p>
 
-            {variants && variants.length > 0 && (
+            {variants && variants.length > 0 && product.showPricing && (
               <div className="mb-8">
                 <label className="font-sans text-xs tracking-luxury uppercase text-muted-foreground block mb-2">
                   Select Size
@@ -193,15 +213,25 @@ const ProductDetail = () => {
             </div>
 
             {/* CTA Button */}
-            <a
-              href={product.amazonLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-luxury-gold inline-flex items-center gap-2 w-full sm:w-auto justify-center"
-            >
-              Buy Now on Amazon
-              <ExternalLink size={16} />
-            </a>
+            {product.enablePurchase ? (
+              <a
+                href={product.amazonLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-luxury-gold inline-flex items-center gap-2 w-full sm:w-auto justify-center"
+              >
+                Buy Now on Amazon
+                <ExternalLink size={16} />
+              </a>
+            ) : (
+              <Link
+                to="/contact"
+                className="btn-luxury-gold inline-flex items-center gap-2 w-full sm:w-auto justify-center"
+              >
+                Contact for Details
+                <ExternalLink size={16} />
+              </Link>
+            )}
           </motion.div>
         </div>
       </div>

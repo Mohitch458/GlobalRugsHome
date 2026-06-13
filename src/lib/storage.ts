@@ -6,12 +6,19 @@ export interface Product {
   description: string;
   shortDescription: string;
   price: number;
+  salePrice?: number;
   images: string[];
   amazonLink: string;
   category: string;
   material: string;
   size: string;
   featured: boolean;
+  colorPalette?: string[];
+  stockStatus?: string;
+  rating?: number;
+  reviewsCount?: number;
+  showPricing?: boolean;
+  enablePurchase?: boolean;
   createdAt: string;
 }
 
@@ -22,6 +29,15 @@ export interface Review {
   comment: string;
   media?: string[];
   userId?: string;
+  createdAt: string;
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  image: string;
+  path: string;
+  className: string;
   createdAt: string;
 }
 
@@ -40,8 +56,9 @@ export interface AdminUser {
   password: string;
 }
 
-const PRODUCTS_KEY = 'luxuryrugs_products';
+const PRODUCTS_KEY = 'luxuryrugs_products_v5';
 const REVIEWS_KEY = 'luxuryrugs_reviews';
+const CATEGORIES_KEY = 'luxuryrugs_categories';
 const ADMIN_KEY = 'luxuryrugs_admin';
 const AUTH_KEY = 'luxuryrugs_auth';
 const USERS_KEY = 'luxuryrugs_users';
@@ -228,86 +245,51 @@ export const addReview = (review: Omit<Review, 'id' | 'createdAt'>): Review => {
 };
 
 // Initialize with sample data if empty
+export const getCategories = (): Category[] => {
+  const data = localStorage.getItem(CATEGORIES_KEY);
+  return data ? JSON.parse(data) : [];
+};
+
+export const addCategory = (category: Omit<Category, 'id' | 'createdAt'>): Category => {
+  const categories = getCategories();
+  const newCategory: Category = {
+    ...category,
+    id: Date.now().toString() + Math.random().toString(36).substr(2, 5),
+    createdAt: new Date().toISOString()
+  };
+  categories.push(newCategory);
+  localStorage.setItem(CATEGORIES_KEY, JSON.stringify(categories));
+  return newCategory;
+};
+
+export const updateCategory = (id: string, updates: Partial<Category>): Category | null => {
+  const categories = getCategories();
+  const index = categories.findIndex(c => c.id === id);
+  if (index === -1) return null;
+
+  categories[index] = { ...categories[index], ...updates };
+  localStorage.setItem(CATEGORIES_KEY, JSON.stringify(categories));
+  return categories[index];
+};
+
+export const deleteCategory = (id: string): boolean => {
+  const categories = getCategories();
+  const filtered = categories.filter(c => c.id !== id);
+  if (filtered.length === categories.length) return false;
+
+  localStorage.setItem(CATEGORIES_KEY, JSON.stringify(filtered));
+  return true;
+};
+
+import { SEED_PRODUCTS } from './seedData';
+
+// Initialize with sample data if empty
 export const initializeSampleData = (): void => {
   const products = getProducts();
   if (products.length === 0) {
-    const sampleProducts: Omit<Product, 'id' | 'createdAt'>[] = [
-      {
-        name: "Persian Heritage Collection",
-        description: "A masterpiece of traditional Persian craftsmanship, this hand-knotted rug features an intricate medallion design passed down through generations. Each knot is meticulously tied by skilled artisans using premium wool and natural dyes. The warm ivory background beautifully contrasts with rich gold and terracotta accents, creating a timeless piece that anchors any space with elegance.",
-        shortDescription: "Hand-knotted Persian wool rug with traditional medallion design",
-        price: 2499,
-        images: ["/src/assets/rug-1.jpg", "/src/assets/rug-3.jpg", "/src/assets/rug-5.jpg"],
-        amazonLink: "https://www.amazon.com",
-        category: "Traditional",
-        material: "100% Hand-spun Wool",
-        size: "8' x 10'",
-        featured: true
-      },
-      {
-        name: "Golden Bloom Silk Rug",
-        description: "Inspired by the delicate beauty of Persian gardens, this luxurious silk rug showcases an exquisite floral pattern. Hand-woven by master craftsmen using the finest mulberry silk, it boasts an extraordinary sheen that dances with light. The subtle gold and ivory color palette ensures versatility while maintaining an air of sophistication.",
-        shortDescription: "Handwoven silk rug with delicate floral motifs",
-        price: 3899,
-        images: ["/src/assets/rug-2.jpg", "/src/assets/rug-1.jpg"],
-        amazonLink: "https://www.amazon.com",
-        category: "Silk",
-        material: "100% Mulberry Silk",
-        size: "6' x 9'",
-        featured: true
-      },
-      {
-        name: "Tribal Artisan Collection",
-        description: "This bold geometric rug celebrates the rich heritage of tribal weaving traditions. Hand-knotted by nomadic artisans, each piece tells a unique story through its symbols and patterns. The charcoal border frames vibrant terracotta and cream motifs, creating a striking focal point for modern and traditional interiors alike.",
-        shortDescription: "Hand-knotted tribal rug with bold geometric patterns",
-        price: 1899,
-        images: ["/src/assets/rug-3.jpg", "/src/assets/rug-4.jpg", "/src/assets/rug-6.jpg"],
-        amazonLink: "https://www.amazon.com",
-        category: "Tribal",
-        material: "Hand-spun Wool",
-        size: "5' x 8'",
-        featured: true
-      },
-      {
-        name: "Contemporary Organic Rug",
-        description: "A modern interpretation of organic forms, this contemporary rug features soft, flowing shapes in a sophisticated neutral palette. Hand-tufted using premium New Zealand wool, it offers exceptional softness underfoot while adding visual interest to minimalist spaces.",
-        shortDescription: "Modern hand-tufted rug with organic abstract design",
-        price: 1299,
-        images: ["/src/assets/rug-4.jpg", "/src/assets/rug-2.jpg"],
-        amazonLink: "https://www.amazon.com",
-        category: "Contemporary",
-        material: "New Zealand Wool",
-        size: "6' x 9'",
-        featured: false
-      },
-      {
-        name: "Vintage Kilim Heritage",
-        description: "This flat-weave Kilim rug embodies centuries of weaving tradition. Handcrafted using time-honored techniques, it features classic geometric patterns in rich burgundy and navy against a cream background. Its reversible design and durable construction make it a practical yet beautiful addition to any home.",
-        shortDescription: "Traditional handwoven Kilim with vintage patterns",
-        price: 899,
-        images: ["/src/assets/rug-5.jpg", "/src/assets/rug-6.jpg"],
-        amazonLink: "https://www.amazon.com",
-        category: "Kilim",
-        material: "Hand-spun Wool",
-        size: "4' x 6'",
-        featured: false
-      },
-      {
-        name: "Botanical Garden Collection",
-        description: "Drawing inspiration from nature's elegance, this hand-tufted rug features a sophisticated botanical pattern. Cascading leaves in ivory gracefully adorn a sage green background, bringing the serenity of a garden into your home. The plush pile offers exceptional comfort and timeless beauty.",
-        shortDescription: "Hand-tufted botanical pattern in sage and ivory",
-        price: 1599,
-        images: ["/src/assets/rug-6.jpg", "/src/assets/rug-3.jpg", "/src/assets/rug-1.jpg"],
-        amazonLink: "https://www.amazon.com",
-        category: "Botanical",
-        material: "Premium Wool Blend",
-        size: "8' x 10'",
-        featured: true
-      }
-    ];
-
-    sampleProducts.forEach(product => addProduct(product));
+    SEED_PRODUCTS.forEach(product => addProduct(product));
   }
+
 
   const reviews = getReviews();
   if (reviews.length === 0) {
@@ -330,6 +312,29 @@ export const initializeSampleData = (): void => {
     ];
 
     sampleReviews.forEach(review => addReview(review));
+  }
+
+  const categories = getCategories();
+  if (categories.length === 0) {
+    const sampleCategories: Omit<Category, 'id' | 'createdAt'>[] = [
+      { name: "Entire Collection", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", path: "/products", className: "md:col-span-2 lg:col-span-2 md:row-span-2" },
+      { name: "Floral Rugs", image: "https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", path: "/products?category=Floral Rugs", className: "md:col-span-1 lg:col-span-1" },
+      { name: "Animal Rugs", image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", path: "/products?category=Animal Rugs", className: "md:col-span-1 lg:col-span-1" },
+      { name: "Modern Rugs", image: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", path: "/products?category=Modern Rugs", className: "md:col-span-1 lg:col-span-1" },
+      { name: "Traditional Rugs", image: "https://images.unsplash.com/photo-1588688402435-0ab27d424b58?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", path: "/products?category=Traditional Rugs", className: "md:col-span-1 lg:col-span-1" },
+      { name: "Irregular & Artistic Rugs", image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", path: "/products?category=Irregular %26 Artistic Rugs", className: "md:col-span-1 lg:col-span-1" },
+      { name: "Natural Fiber Rugs", image: "https://images.unsplash.com/photo-1596464716127-f2a82984de30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", path: "/products?category=Natural Fiber Rugs", className: "md:col-span-2 lg:col-span-2" },
+      { name: "Geometric Rugs", image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", path: "/products?category=Geometric Rugs", className: "md:col-span-1 lg:col-span-1" },
+      { name: "Abstract Rugs", image: "https://images.unsplash.com/photo-1565182999561-18d7dc61c393?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", path: "/products?category=Abstract Rugs", className: "md:col-span-1 lg:col-span-1" },
+      { name: "Contemporary Rugs", image: "https://images.unsplash.com/photo-1534349762230-e0cadf78f5da?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", path: "/products?category=Contemporary Rugs", className: "md:col-span-1 lg:col-span-1" },
+      { name: "Vintage & Distressed Rugs", image: "https://images.unsplash.com/photo-1558882224-dda166733046?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", path: "/products?category=Vintage %26 Distressed Rugs", className: "md:col-span-1 lg:col-span-1" },
+      { name: "Bohemian Rugs", image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", path: "/products?category=Bohemian Rugs", className: "md:col-span-1 lg:col-span-1" },
+      { name: "Kids & Nursery Rugs", image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", path: "/products?category=Kids %26 Nursery Rugs", className: "md:col-span-1 lg:col-span-1" },
+      { name: "Handcrafted Rugs", image: "https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", path: "/products?category=Handcrafted Rugs", className: "md:col-span-1 lg:col-span-1" },
+      { name: "Luxury Designer Rugs", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", path: "/products?category=Luxury Designer Rugs", className: "md:col-span-2 lg:col-span-2" }
+    ];
+
+    sampleCategories.forEach(category => addCategory(category));
   }
 
   initializeAdmin();

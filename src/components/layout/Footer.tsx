@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Instagram, Facebook, Twitter, Mail, Phone, ArrowRight } from 'lucide-react';
+import { Instagram, Facebook, Twitter, Mail, ArrowRight } from 'lucide-react';
 import logoImg from '@/assets/logo.png';
 
 const Footer = () => {
@@ -93,17 +93,7 @@ const Footer = () => {
               <span className="absolute -bottom-2 left-0 w-1/2 h-0.5 bg-gold"></span>
             </h4>
             <ul className="space-y-5 mt-2">
-              <li className="flex items-start gap-4 group">
-                <div className="mt-1 w-8 h-8 rounded-full bg-ivory/5 flex items-center justify-center group-hover:bg-gold transition-colors duration-300 flex-shrink-0">
-                  <Phone size={14} className="text-gold group-hover:text-charcoal transition-colors duration-300" />
-                </div>
-                <div>
-                  <span className="block text-[10px] uppercase tracking-wider text-ivory/50 mb-1">Call Us</span>
-                  <a href="tel:+1234567890" className="text-ivory/80 hover:text-gold transition-colors font-sans text-sm">
-                    +1 (234) 567-890
-                  </a>
-                </div>
-              </li>
+
               <li className="flex items-start gap-4 group">
                 <div className="mt-1 w-8 h-8 rounded-full bg-ivory/5 flex items-center justify-center group-hover:bg-gold transition-colors duration-300 flex-shrink-0">
                   <Mail size={14} className="text-gold group-hover:text-charcoal transition-colors duration-300" />

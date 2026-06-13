@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, MessageCircle } from 'lucide-react';
+import { Mail, MapPin, Send } from 'lucide-react';
 
 const Contact = () => {
   return (
@@ -46,16 +46,6 @@ const Contact = () => {
               </a>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl shadow-sm border border-neutral-100 text-center hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-neutral-50 rounded-full flex items-center justify-center mx-auto mb-4 text-gold">
-                <MessageCircle size={24} />
-              </div>
-              <h3 className="font-serif text-xl mb-2 text-neutral-900">WhatsApp</h3>
-              <p className="text-neutral-500 font-sans text-sm mb-4">Chat with our design experts.</p>
-              <a href="#" className="font-sans font-medium text-neutral-900 hover:text-gold transition-colors">
-                Click here to chat
-              </a>
-            </div>
 
             <div className="bg-white p-8 rounded-2xl shadow-sm border border-neutral-100 text-center hover:shadow-md transition-shadow">
               <div className="w-12 h-12 bg-neutral-50 rounded-full flex items-center justify-center mx-auto mb-4 text-gold">

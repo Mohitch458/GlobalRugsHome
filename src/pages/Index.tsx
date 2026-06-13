@@ -5,6 +5,7 @@ import FeaturedCollection from '@/components/home/FeaturedCollection';
 import Testimonials from '@/components/home/Testimonials';
 import CallToAction from '@/components/home/CallToAction';
 import { initializeSampleData } from '@/lib/storage';
+import CollectionsSection from '@/components/home/CollectionsSection';
 
 const Index = () => {
   useEffect(() => {
@@ -15,6 +16,7 @@ const Index = () => {
     <main>
       <Hero />
       <BrandStory />
+      <CollectionsSection />
       <FeaturedCollection />
       <Testimonials />
       <CallToAction />
