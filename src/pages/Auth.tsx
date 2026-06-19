@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { loginUser, registerUser, loginAdmin } from '@/lib/storage';
+import { loginAdmin } from '@/lib/storage';
+import { apiLogin, apiRegister } from '@/lib/api';
 import { toast } from '@/hooks/use-toast';
 import { SocialLoginButtons } from '@/components/auth/SocialLoginButtons';
 
@@ -9,6 +10,7 @@ const Auth = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Form states
   const [name, setName] = useState('');
@@ -23,49 +25,47 @@ const Auth = () => {
     }
   }, [location.state]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (isLogin) {
-      if (loginAdmin(email, password)) {
-        toast({ title: "Welcome back, Admin!" });
-        navigate('/admin');
-        return;
-      }
+    setIsLoading(true);
 
-      const user = loginUser(email, password);
-      if (user) {
-        toast({ title: "Welcome back!", description: `Logged in as ${user.name}` });
-        navigate('/reviews'); // Or another appropriate page
-      } else {
-        toast({ 
-          title: "Login Failed", 
-          description: "Invalid email or password.",
-          variant: "destructive" 
-        });
-      }
-    } else {
-      if (password.length < 6) {
-        toast({ 
-          title: "Registration Failed", 
-          description: "Password must be at least 6 characters.",
-          variant: "destructive" 
-        });
-        return;
-      }
-      const user = registerUser(name, email, password);
-      if (user) {
-        toast({ title: "Registration Successful", description: "You are now logged in." });
-        // Auto-login after registration
-        loginUser(email, password);
+    try {
+      if (isLogin) {
+        // Check admin login first (local)
+        if (loginAdmin(email, password)) {
+          toast({ title: "Welcome back, Admin!" });
+          navigate('/admin');
+          return;
+        }
+
+        // Real backend login
+        const data = await apiLogin(email, password);
+        toast({ title: "Welcome back!", description: `Logged in as ${data.user.name}` });
         navigate('/reviews');
       } else {
-        toast({ 
-          title: "Registration Failed", 
-          description: "An account with this email already exists.",
-          variant: "destructive" 
-        });
+        if (password.length < 6) {
+          toast({
+            title: "Registration Failed",
+            description: "Password must be at least 6 characters.",
+            variant: "destructive"
+          });
+          return;
+        }
+
+        // Real backend register
+        const data = await apiRegister(name, email, password);
+        toast({ title: "Registration Successful", description: `Welcome, ${data.user.name}!` });
+        navigate('/reviews');
       }
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Something went wrong';
+      toast({
+        title: isLogin ? "Login Failed" : "Registration Failed",
+        description: message,
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -140,8 +140,8 @@ const Auth = () => {
               placeholder="••••••••"
             />
           </div>
-          <button type="submit" className="btn-luxury-primary w-full">
-            {isLogin ? 'Sign In' : 'Register'}
+          <button type="submit" disabled={isLoading} className="btn-luxury-primary w-full disabled:opacity-60 disabled:cursor-not-allowed">
+            {isLoading ? 'Please wait...' : isLogin ? 'Sign In' : 'Register'}
           </button>
         </form>
 

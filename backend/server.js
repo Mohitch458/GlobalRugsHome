@@ -7,9 +7,25 @@ const { errorHandler } = require('./middleware/errorMiddleware');
 
 const app = express();
 
-// Middleware
+// CORS — allow GitHub Pages frontend + localhost for dev
+const allowedOrigins = [
+  'https://mohitch458.github.io',
+  'http://localhost:8080',
+  'http://localhost:3000',
+];
+
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+  origin: (origin, callback) => {
+    // Allow requests with no origin (e.g. mobile apps, curl, Postman)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`CORS policy does not allow origin: ${origin}`));
+    }
+  },
+  credentials: true,
+}));
 app.use(express.json());
 
 // Routes
