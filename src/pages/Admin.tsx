@@ -11,18 +11,28 @@ import {
   deleteProduct,
   updateProduct,
   initializeAdmin,
-  type Product
+  getContactSettings,
+  updateContactSettings,
+  type Product,
+  type ContactSettings
 } from '@/lib/storage';
 import { getImageUrl } from '@/lib/utils';
 import { toast } from '@/hooks/use-toast';
 import ManageCategories from '@/components/admin/ManageCategories';
 
 const Admin = () => {
-  const [activeTab, setActiveTab] = useState<'products' | 'categories'>('products');
+  const [activeTab, setActiveTab] = useState<'products' | 'categories' | 'settings'>('products');
   const [authenticated, setAuthenticated] = useState<boolean | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [isAddingProduct, setIsAddingProduct] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+  
+  // Contact settings state
+  const [contactSettings, setContactSettings] = useState<ContactSettings>({
+    email: '',
+    subject: '',
+    bodyTemplate: ''
+  });
 
   // Form state
   const [formData, setFormData] = useState({
@@ -46,6 +56,7 @@ const Admin = () => {
     setAuthenticated(isAuth);
     if (isAuth) {
       setProducts(getProducts());
+      setContactSettings(getContactSettings());
     }
   }, []);
 
@@ -211,9 +222,67 @@ const Admin = () => {
             Categories
             {activeTab === 'categories' && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gold" />}
           </button>
+          <button
+            onClick={() => setActiveTab('settings')}
+            className={`pb-4 font-serif text-lg transition-colors relative ${activeTab === 'settings' ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
+          >
+            Settings
+            {activeTab === 'settings' && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gold" />}
+          </button>
         </div>
 
-        {activeTab === 'products' ? (
+        {activeTab === 'settings' ? (
+          <div className="bg-background p-8 shadow-soft">
+            <h2 className="font-serif text-2xl text-foreground mb-6">Contact Form Settings</h2>
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              updateContactSettings(contactSettings);
+              toast({ title: "Settings updated successfully!" });
+            }} className="space-y-6">
+              <div>
+                <label className="font-sans text-xs tracking-luxury uppercase text-muted-foreground block mb-2">
+                  Recipient Email(s)
+                </label>
+                <input
+                  type="text"
+                  value={contactSettings.email}
+                  onChange={(e) => setContactSettings({ ...contactSettings, email: e.target.value })}
+                  placeholder="e.g. hello@globalrugs.com, sales@globalrugs.com"
+                  className="w-full px-4 py-3 bg-muted border border-border font-sans text-sm focus:outline-none focus:border-gold transition-colors"
+                />
+                <p className="text-xs text-muted-foreground mt-1">Separate multiple emails with a comma.</p>
+              </div>
+              <div>
+                <label className="font-sans text-xs tracking-luxury uppercase text-muted-foreground block mb-2">
+                  Default Email Subject
+                </label>
+                <input
+                  type="text"
+                  value={contactSettings.subject}
+                  onChange={(e) => setContactSettings({ ...contactSettings, subject: e.target.value })}
+                  className="w-full px-4 py-3 bg-muted border border-border font-sans text-sm focus:outline-none focus:border-gold transition-colors"
+                />
+              </div>
+              <div>
+                <label className="font-sans text-xs tracking-luxury uppercase text-muted-foreground block mb-2">
+                  Default Email Body Template
+                </label>
+                <textarea
+                  value={contactSettings.bodyTemplate}
+                  onChange={(e) => setContactSettings({ ...contactSettings, bodyTemplate: e.target.value })}
+                  className="w-full px-4 py-3 bg-muted border border-border font-sans text-sm focus:outline-none focus:border-gold transition-colors min-h-[250px]"
+                />
+                <p className="text-xs text-muted-foreground mt-1">Use <code>{`{{PRODUCT}}`}</code> as a placeholder for the product name if the user clicks inquire on a specific product.</p>
+              </div>
+              <div className="flex justify-end">
+                <button type="submit" className="btn-luxury-primary flex items-center gap-2">
+                  <Save size={18} />
+                  Save Settings
+                </button>
+              </div>
+            </form>
+          </div>
+        ) : activeTab === 'products' ? (
           <>
             {/* Add/Edit Product Form */}
             {isAddingProduct && (

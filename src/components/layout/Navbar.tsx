@@ -4,6 +4,7 @@ import { Menu, X, User as UserIcon, Facebook, Instagram, Linkedin, Twitter } fro
 import { motion, AnimatePresence } from 'framer-motion';
 import { getAuthenticatedUser, logoutUser, type User } from '@/lib/storage';
 import logoImg from '@/assets/logo.png';
+import { useContactLink } from '@/hooks/useContactLink';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -11,6 +12,7 @@ const Navbar = () => {
   const [user, setUser] = useState<User | null>(null);
   const location = useLocation();
   const navigate = useNavigate();
+  const { handleContactClick } = useContactLink();
 
   const isHomePage = location.pathname === '/';
   const useLightText = isHomePage && !isScrolled;
@@ -69,14 +71,14 @@ const Navbar = () => {
           <Link to="/" className="flex items-center gap-3">
             <img 
               src={logoImg} 
-              alt="GlobalRugHome Logo" 
+              alt="Global Rug Homes Logo" 
               className="h-12 md:h-16 lg:h-20 w-auto object-contain rounded-sm"
             />
             <div className="flex flex-col">
               <span className={`font-serif text-xl md:text-2xl tracking-wide leading-none transition-colors duration-300 ${
                 !useLightText ? 'text-foreground' : 'text-primary-foreground'
               }`}>
-                Global Rugs <span className="text-gold">Homes</span>
+                Global Rug <span className="text-gold">Homes</span>
               </span>
               <span className={`hidden md:block text-[10px] md:text-xs tracking-widest uppercase mt-1 transition-colors duration-300 ${
                 !useLightText ? 'text-foreground/70' : 'text-primary-foreground/70'
@@ -189,9 +191,9 @@ const Navbar = () => {
                 <div className="w-full h-px bg-border my-6"></div>
 
                 <div className="flex flex-col gap-4 w-full">
-                  <a href="mailto:hello@globalrugshome.com" className="font-sans text-sm text-foreground/80 hover:text-gold transition-colors">
+                  <button onClick={handleContactClick} className="font-sans text-sm text-foreground/80 hover:text-gold transition-colors text-left bg-transparent border-none cursor-pointer p-0">
                     hello@globalrugshome.com
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>

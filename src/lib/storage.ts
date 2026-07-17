@@ -56,6 +56,12 @@ export interface AdminUser {
   password: string;
 }
 
+export interface ContactSettings {
+  email: string;
+  subject: string;
+  bodyTemplate: string;
+}
+
 const PRODUCTS_KEY = 'luxuryrugs_products_v5';
 const REVIEWS_KEY = 'luxuryrugs_reviews';
 const CATEGORIES_KEY = 'luxuryrugs_categories';
@@ -63,6 +69,29 @@ const ADMIN_KEY = 'luxuryrugs_admin';
 const AUTH_KEY = 'luxuryrugs_auth';
 const USERS_KEY = 'luxuryrugs_users';
 const USER_AUTH_KEY = 'luxuryrugs_user_auth';
+const CONTACT_SETTINGS_KEY = 'luxuryrugs_contact_settings';
+
+const DEFAULT_CONTACT_SETTINGS: ContactSettings = {
+  email: 'globalrughomes@gmail.com',
+  subject: 'Inquiry from Global Rugs Website',
+  bodyTemplate: `Hello Global Rugs Team,
+
+I would like to inquire about your rug collections.
+
+My Details:
+
+Name:
+Email:
+Phone:
+Company (Optional):
+
+Collection/Product of Interest: {{PRODUCT}}
+
+Message:
+
+
+Thank you,`
+};
 
 // Default admin credentials
 const DEFAULT_ADMIN: AdminUser = {
@@ -94,6 +123,16 @@ export const logoutAdmin = (): void => {
 
 export const isAuthenticated = (): boolean => {
   return localStorage.getItem(AUTH_KEY) === 'true';
+};
+
+// Contact Settings
+export const getContactSettings = (): ContactSettings => {
+  const data = localStorage.getItem(CONTACT_SETTINGS_KEY);
+  return data ? JSON.parse(data) : DEFAULT_CONTACT_SETTINGS;
+};
+
+export const updateContactSettings = (settings: ContactSettings): void => {
+  localStorage.setItem(CONTACT_SETTINGS_KEY, JSON.stringify(settings));
 };
 
 // General User Authentication
