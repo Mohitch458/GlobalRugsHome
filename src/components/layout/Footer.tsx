@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Instagram, Facebook, Twitter, Mail, ArrowRight, Linkedin } from 'lucide-react';
+import { Instagram, Facebook, Mail, ArrowRight, Linkedin } from 'lucide-react';
 import logoImg from '@/assets/logo.png';
 import { useContactLink } from '@/hooks/useContactLink';
 
@@ -98,7 +98,9 @@ const Footer = () => {
             </p>
             <div className="flex flex-wrap gap-3">
               <a
-                href="#"
+                href="https://www.pinterest.com/globalrughome/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-transparent border border-ivory/30 flex items-center justify-center hover:bg-gold hover:border-gold hover:text-charcoal transition-all duration-300 hover:shadow-gold"
                 aria-label="Pinterest"
               >
@@ -112,11 +114,13 @@ const Footer = () => {
                 <Facebook size={18} />
               </a>
               <a
-                href="#"
+                href="https://x.com/GlobalRugHome"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-transparent border border-ivory/30 flex items-center justify-center hover:bg-gold hover:border-gold hover:text-charcoal transition-all duration-300 hover:shadow-gold"
                 aria-label="Twitter"
               >
-                <Twitter size={18} />
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
               </a>
               <a
                 href="#"
@@ -126,7 +130,9 @@ const Footer = () => {
                 <Linkedin size={18} />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/globalrughome/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-transparent border border-ivory/30 flex items-center justify-center hover:bg-gold hover:border-gold hover:text-charcoal transition-all duration-300 hover:shadow-gold"
                 aria-label="Instagram"
               >

@@ -64,7 +64,7 @@ export interface ContactSettings {
 
 const PRODUCTS_KEY = 'luxuryrugs_products_v5';
 const REVIEWS_KEY = 'luxuryrugs_reviews';
-const CATEGORIES_KEY = 'luxuryrugs_categories';
+const CATEGORIES_KEY = 'luxuryrugs_categories_v6';
 const ADMIN_KEY = 'luxuryrugs_admin';
 const AUTH_KEY = 'luxuryrugs_auth';
 const USERS_KEY = 'luxuryrugs_users';
@@ -356,21 +356,18 @@ export const initializeSampleData = (): void => {
   const categories = getCategories();
   if (categories.length === 0) {
     const sampleCategories: Omit<Category, 'id' | 'createdAt'>[] = [
-      { name: "Entire Collection", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", path: "/products", className: "md:col-span-2 lg:col-span-2 md:row-span-2" },
       { name: "Floral Rugs", image: "https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", path: "/products?category=Floral Rugs", className: "md:col-span-1 lg:col-span-1" },
       { name: "Animal Rugs", image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", path: "/products?category=Animal Rugs", className: "md:col-span-1 lg:col-span-1" },
       { name: "Modern Rugs", image: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", path: "/products?category=Modern Rugs", className: "md:col-span-1 lg:col-span-1" },
       { name: "Traditional Rugs", image: "https://images.unsplash.com/photo-1588688402435-0ab27d424b58?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", path: "/products?category=Traditional Rugs", className: "md:col-span-1 lg:col-span-1" },
-      { name: "Irregular & Artistic Rugs", image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", path: "/products?category=Irregular %26 Artistic Rugs", className: "md:col-span-1 lg:col-span-1" },
-      { name: "Natural Fiber Rugs", image: "https://images.unsplash.com/photo-1596464716127-f2a82984de30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", path: "/products?category=Natural Fiber Rugs", className: "md:col-span-2 lg:col-span-2" },
+      { name: "Irregular & Artistic Rugs", image: "https://i.pinimg.com/736x/b0/0d/82/b00d823b255fed3454bfeaba402b84a3.jpg", path: "/products?category=Irregular %26 Artistic Rugs", className: "md:col-span-1 lg:col-span-1" },
+      { name: "Natural Fiber Rugs", image: "https://images.unsplash.com/photo-1596464716127-f2a82984de30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", path: "/products?category=Natural Fiber Rugs", className: "md:col-span-1 lg:col-span-1" },
       { name: "Geometric Rugs", image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", path: "/products?category=Geometric Rugs", className: "md:col-span-1 lg:col-span-1" },
       { name: "Abstract Rugs", image: "https://images.unsplash.com/photo-1565182999561-18d7dc61c393?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", path: "/products?category=Abstract Rugs", className: "md:col-span-1 lg:col-span-1" },
-      { name: "Contemporary Rugs", image: "https://images.unsplash.com/photo-1534349762230-e0cadf78f5da?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", path: "/products?category=Contemporary Rugs", className: "md:col-span-1 lg:col-span-1" },
-      { name: "Vintage & Distressed Rugs", image: "https://images.unsplash.com/photo-1558882224-dda166733046?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", path: "/products?category=Vintage %26 Distressed Rugs", className: "md:col-span-1 lg:col-span-1" },
-      { name: "Bohemian Rugs", image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", path: "/products?category=Bohemian Rugs", className: "md:col-span-1 lg:col-span-1" },
       { name: "Kids & Nursery Rugs", image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", path: "/products?category=Kids %26 Nursery Rugs", className: "md:col-span-1 lg:col-span-1" },
-      { name: "Handcrafted Rugs", image: "https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", path: "/products?category=Handcrafted Rugs", className: "md:col-span-1 lg:col-span-1" },
-      { name: "Luxury Designer Rugs", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", path: "/products?category=Luxury Designer Rugs", className: "md:col-span-2 lg:col-span-2" }
+      { name: "Round Rugs", image: "https://i.pinimg.com/736x/f5/dc/fd/f5dcfd302742a6c84139f2397184cf25.jpg", path: "/products?category=Round Rugs", className: "md:col-span-1 lg:col-span-1" },
+      { name: "Runner Rugs", image: "https://i.pinimg.com/736x/7d/a9/88/7da988b98f4978bc75624bafad90b54a.jpg", path: "/products?category=Runner Rugs", className: "md:col-span-1 lg:col-span-1" },
+      { name: "Oushak Rugs", image: "https://i.pinimg.com/736x/10/6b/d9/106bd96857f25a3e466ff36ff26b7ed8.jpg", path: "/products?category=Oushak Rugs", className: "md:col-span-1 lg:col-span-1" }
     ];
 
     sampleCategories.forEach(category => addCategory(category));
