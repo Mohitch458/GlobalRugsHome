@@ -60,13 +60,13 @@ const Navbar = () => {
           <Link to="/" className="flex items-center gap-3">
             <img
               src={logoImg}
-              alt="Global Rug Homes Logo"
+              alt="Global Rug Home Logo"
               className="h-12 md:h-16 lg:h-20 w-auto object-contain rounded-sm"
             />
             <div className="flex flex-col">
               <span className={`font-serif text-xl md:text-2xl tracking-wide leading-none transition-colors duration-300 ${!useLightText ? 'text-foreground' : 'text-primary-foreground'
                 }`}>
-                Global Rug <span className="text-gold">Homes</span>
+                Global Rug <span className="text-gold">Home</span>
               </span>
               <span className={`hidden md:block text-[10px] md:text-xs tracking-widest uppercase mt-1 transition-colors duration-300 ${!useLightText ? 'text-foreground/70' : 'text-primary-foreground/70'
                 }`}>

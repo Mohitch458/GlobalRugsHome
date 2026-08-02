@@ -115,7 +115,7 @@ const Reviews = () => {
                   Share Your Experience
                 </h2>
                 <p className="font-sans text-sm text-muted-foreground mb-6">
-                  We'd love to hear about your Global Rug Homes experience.
+                  We'd love to hear about your Global Rug Home experience.
                 </p>
                 
                 {user ? (

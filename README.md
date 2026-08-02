@@ -1,4 +1,4 @@
-# GlobalRugsHomes Project
+# Global Rug Home Project
 
 This project is built with:
 

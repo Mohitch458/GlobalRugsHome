@@ -20,14 +20,14 @@ const Footer = () => {
               <div className="relative">
                 <img 
                   src={logoImg} 
-                  alt="Global Rug Homes Logo" 
+                  alt="Global Rug Home Logo" 
                   className="h-16 md:h-20 w-auto object-contain rounded-sm transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gold/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-sm"></div>
               </div>
               <div className="flex flex-col">
                 <span className="font-serif text-2xl md:text-3xl tracking-wide leading-none transition-colors duration-300">
-                  GLOBAL RUG <span className="text-gold">HOMES</span>
+                  GLOBAL RUG <span className="text-gold">HOME</span>
                 </span>
                 <span className="text-[11px] tracking-[0.2em] uppercase mt-2 text-ivory/80 font-medium">
                   Find your perfect floor
@@ -149,7 +149,7 @@ const Footer = () => {
       <div className="border-t border-ivory/10 bg-charcoal/50">
         <div className="container-luxury py-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-ivory/50 font-sans text-xs flex items-center gap-1">
-            &copy; {new Date().getFullYear()} <span className="text-gold-muted">Global Rug Homes</span>. All rights reserved.
+            &copy; {new Date().getFullYear()} <span className="text-gold-muted">Global Rug Home</span>. All rights reserved.
           </p>
           <div className="flex gap-8">
             <a href="#" className="text-ivory/50 hover:text-gold relative elegant-underline transition-colors font-sans text-xs uppercase tracking-wider">
