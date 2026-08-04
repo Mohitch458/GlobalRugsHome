@@ -24,13 +24,21 @@ export const useContactLink = () => {
 
     // Show toast for fallback
     toast({
-      title: "Opening your email app...",
+      title: "Opening your email...",
       description: `If nothing happens, you can email us directly at ${settings.email} (Copied to clipboard!)`,
       duration: 5000,
     });
 
-    // Attempt to open mailto link
-    window.location.href = mailtoUrl;
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      // On mobile, mailto: works well with native apps
+      window.location.href = mailtoUrl;
+    } else {
+      // On desktop, default to Gmail web compose since many users lack native mail apps
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(settings.email)}&su=${encodeURIComponent(settings.subject)}&body=${encodeURIComponent(body)}`;
+      window.open(gmailUrl, '_blank');
+    }
   }, []);
 
   return { handleContactClick };
