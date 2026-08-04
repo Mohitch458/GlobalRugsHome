@@ -135,6 +135,13 @@ const CATEGORY_IMAGE_MAP: Record<string, string[]> = {
 
 // ─── resolve multi-images for a category ─────────────────────────────────────
 function resolveImages(col: Category): string[] {
+  if (col.images && col.images.length > 0) return [col.images[0]];
+
+  const nameLower = col.name.toLowerCase();
+  for (const [key, imgs] of Object.entries(CATEGORY_IMAGE_MAP)) {
+    if (nameLower.includes(key) && imgs.length > 0) return [imgs[0]];
+  }
+  
   return [col.image];
 }
 
