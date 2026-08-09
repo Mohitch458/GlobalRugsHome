@@ -41,20 +41,6 @@ export interface Category {
   createdAt: string;
 }
 
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  password?: string;
-  provider?: 'local' | 'google' | 'facebook';
-  picture?: string;
-  createdAt: string;
-}
-
-export interface AdminUser {
-  username: string;
-  password: string;
-}
 
 export interface ContactSettings {
   email: string;
@@ -65,10 +51,6 @@ export interface ContactSettings {
 const PRODUCTS_KEY = 'luxuryrugs_products_v5';
 const REVIEWS_KEY = 'luxuryrugs_reviews';
 const CATEGORIES_KEY = 'luxuryrugs_categories_v6';
-const ADMIN_KEY = 'luxuryrugs_admin';
-const AUTH_KEY = 'luxuryrugs_auth';
-const USERS_KEY = 'luxuryrugs_users';
-const USER_AUTH_KEY = 'luxuryrugs_user_auth';
 const CONTACT_SETTINGS_KEY = 'luxuryrugs_contact_settings';
 
 const DEFAULT_CONTACT_SETTINGS: ContactSettings = {
@@ -93,37 +75,6 @@ Message:
 Thank you,`
 };
 
-// Default admin credentials
-const DEFAULT_ADMIN: AdminUser = {
-  username: 'admin',
-  password: 'GlobalRugsHome@2026'
-};
-
-// Initialize admin if not exists
-export const initializeAdmin = (): void => {
-  const existing = localStorage.getItem(ADMIN_KEY);
-  if (!existing) {
-    localStorage.setItem(ADMIN_KEY, JSON.stringify(DEFAULT_ADMIN));
-  }
-};
-
-// Admin authentication
-export const loginAdmin = (username: string, password: string): boolean => {
-  const admin = JSON.parse(localStorage.getItem(ADMIN_KEY) || JSON.stringify(DEFAULT_ADMIN));
-  if (admin.username === username && admin.password === password) {
-    localStorage.setItem(AUTH_KEY, 'true');
-    return true;
-  }
-  return false;
-};
-
-export const logoutAdmin = (): void => {
-  localStorage.removeItem(AUTH_KEY);
-};
-
-export const isAuthenticated = (): boolean => {
-  return localStorage.getItem(AUTH_KEY) === 'true';
-};
 
 // Contact Settings
 export const getContactSettings = (): ContactSettings => {
@@ -135,89 +86,6 @@ export const updateContactSettings = (settings: ContactSettings): void => {
   localStorage.setItem(CONTACT_SETTINGS_KEY, JSON.stringify(settings));
 };
 
-// General User Authentication
-export const getUsers = (): User[] => {
-  const data = localStorage.getItem(USERS_KEY);
-  return data ? JSON.parse(data) : [];
-};
-
-export const registerUser = (name: string, email: string, password: string): User | null => {
-  const users = getUsers();
-  if (users.find(u => u.email === email)) {
-    return null; // User already exists
-  }
-
-  const newUser: User = {
-    id: Date.now().toString(),
-    name,
-    email,
-    password,
-    createdAt: new Date().toISOString()
-  };
-
-  users.push(newUser);
-  localStorage.setItem(USERS_KEY, JSON.stringify(users));
-  return newUser;
-};
-
-export const loginUser = (email: string, password: string): User | null => {
-  const users = getUsers();
-  const user = users.find(u => u.email === email && u.password === password);
-
-  if (user) {
-    const { password: _, ...userWithoutPassword } = user;
-    localStorage.setItem(USER_AUTH_KEY, JSON.stringify(userWithoutPassword));
-    return userWithoutPassword as User;
-  }
-  return null;
-};
-
-export interface SocialProfile {
-  name: string;
-  email: string;
-  picture?: string;
-  provider: 'google' | 'facebook';
-}
-
-export const loginSocialUser = (profile: SocialProfile): User => {
-  const users = getUsers();
-  let user = users.find(u => u.email === profile.email);
-
-  if (user) {
-    // User exists, update social fields if missing
-    if (!user.provider || user.provider === 'local') {
-      user.provider = profile.provider;
-      user.picture = profile.picture || user.picture;
-      localStorage.setItem(USERS_KEY, JSON.stringify(users));
-    }
-  } else {
-    // Create new user
-    user = {
-      id: Date.now().toString(),
-      name: profile.name,
-      email: profile.email,
-      provider: profile.provider,
-      picture: profile.picture,
-      createdAt: new Date().toISOString()
-    };
-    users.push(user);
-    localStorage.setItem(USERS_KEY, JSON.stringify(users));
-  }
-
-  // Log in the user
-  const { password: _, ...userWithoutPassword } = user;
-  localStorage.setItem(USER_AUTH_KEY, JSON.stringify(userWithoutPassword));
-  return userWithoutPassword as User;
-};
-
-export const logoutUser = (): void => {
-  localStorage.removeItem(USER_AUTH_KEY);
-};
-
-export const getAuthenticatedUser = (): User | null => {
-  const userStr = localStorage.getItem(USER_AUTH_KEY);
-  return userStr ? JSON.parse(userStr) : null;
-};
 
 // Products CRUD
 export const getProducts = (): Product[] => {
@@ -372,6 +240,4 @@ export const initializeSampleData = (): void => {
 
     sampleCategories.forEach(category => addCategory(category));
   }
-
-  initializeAdmin();
 };

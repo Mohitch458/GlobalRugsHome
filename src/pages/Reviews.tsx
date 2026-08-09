@@ -3,13 +3,13 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Image as ImageIcon, X } from 'lucide-react';
 import StarRating from '@/components/ui/StarRating';
-import { getReviews, addReview, getAuthenticatedUser, type Review, type User } from '@/lib/storage';
+import { getReviews, addReview, type Review } from '@/lib/storage';
 import { getImageUrl } from '@/lib/utils';
 import { toast } from '@/hooks/use-toast';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState<Review[]>([]);
-  const [user, setUser] = useState<User | null>(null);
+  const [name, setName] = useState('');
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState('');
   const [media, setMedia] = useState<string[]>([]);
@@ -17,7 +17,6 @@ const Reviews = () => {
 
   useEffect(() => {
     setReviews(getReviews());
-    setUser(getAuthenticatedUser());
   }, []);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,8 +41,11 @@ const Reviews = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!user) {
-      toast({ title: "Authentication required", variant: "destructive" });
+    if (!name.trim()) {
+      toast({
+        title: "Please enter your name",
+        variant: "destructive"
+      });
       return;
     }
     
@@ -56,14 +58,15 @@ const Reviews = () => {
     }
 
     const newReview = addReview({ 
-      name: user.name, 
-      userId: user.id,
+      name: name.trim(), 
+      userId: `anon-${Date.now()}`,
       rating, 
       comment: comment.trim(),
       media 
     });
     
     setReviews([newReview, ...reviews]);
+    setName('');
     setRating(5);
     setComment('');
     setMedia([]);
@@ -118,8 +121,20 @@ const Reviews = () => {
                   We'd love to hear about your Global Rug Home experience.
                 </p>
                 
-                {user ? (
                   <form onSubmit={handleSubmit} className="space-y-6">
+                    <div>
+                      <label className="font-sans text-xs tracking-luxury uppercase text-muted-foreground block mb-2">
+                        Your Name
+                      </label>
+                      <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="John Doe"
+                        className="w-full px-4 py-3 bg-background border border-border font-sans text-sm focus:outline-none focus:border-gold transition-colors"
+                      />
+                    </div>
+                    
                     <div>
                       <label className="font-sans text-xs tracking-luxury uppercase text-muted-foreground block mb-2">
                         Your Rating
@@ -184,16 +199,6 @@ const Reviews = () => {
                       Submit Review
                     </button>
                   </form>
-                ) : (
-                  <div className="text-center py-6 border border-border bg-muted/30">
-                    <p className="font-sans text-sm text-muted-foreground mb-4">
-                      Please log in to submit a review.
-                    </p>
-                    <Link to="/auth" state={{ mode: 'login' }} className="btn-luxury-gold inline-block">
-                      Sign In to Review
-                    </Link>
-                  </div>
-                )}
               </div>
             </motion.div>
 

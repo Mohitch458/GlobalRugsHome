@@ -3,7 +3,6 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { GoogleOAuthProvider } from '@react-oauth/google';
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ScrollToTop from "@/components/layout/ScrollToTop";
@@ -13,7 +12,6 @@ import ProductDetail from "./pages/ProductDetail";
 import Reviews from "./pages/Reviews";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
-import Auth from "./pages/Auth";
 import History from "./pages/History";
 import CustomOrders from "./pages/CustomOrders";
 import Contact from "./pages/Contact";
@@ -99,7 +97,6 @@ Available Sizes & Pricing:
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <GoogleOAuthProvider clientId="1234567890-placeholder.apps.googleusercontent.com">
           <BrowserRouter basename="/GlobalRugsHome">
             <ScrollToTop />
             <Navbar />
@@ -109,7 +106,6 @@ Available Sizes & Pricing:
               <Route path="/products/:id" element={<ProductDetail />} />
               <Route path="/reviews" element={<Reviews />} />
               <Route path="/admin" element={<Admin />} />
-              <Route path="/auth" element={<Auth />} />
               <Route path="/history" element={<History />} />
               <Route path="/custom-orders" element={<CustomOrders />} />
               <Route path="/contact" element={<Contact />} />
@@ -118,7 +114,6 @@ Available Sizes & Pricing:
             </Routes>
             <Footer />
           </BrowserRouter>
-        </GoogleOAuthProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );

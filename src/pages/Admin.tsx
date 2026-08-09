@@ -1,16 +1,11 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Plus, Trash2, Edit2, LogOut, Image as ImageIcon, X, Save } from 'lucide-react';
-import { Navigate } from 'react-router-dom';
 import {
-  isAuthenticated,
-  loginAdmin,
-  logoutAdmin,
   getProducts,
   addProduct,
   deleteProduct,
   updateProduct,
-  initializeAdmin,
   getContactSettings,
   updateContactSettings,
   type Product,
@@ -22,7 +17,6 @@ import ManageCategories from '@/components/admin/ManageCategories';
 
 const Admin = () => {
   const [activeTab, setActiveTab] = useState<'products' | 'categories' | 'settings'>('products');
-  const [authenticated, setAuthenticated] = useState<boolean | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [isAddingProduct, setIsAddingProduct] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
@@ -51,21 +45,13 @@ const Admin = () => {
   });
 
   useEffect(() => {
-    initializeAdmin();
-    const isAuth = isAuthenticated();
-    setAuthenticated(isAuth);
-    if (isAuth) {
-      setProducts(getProducts());
-      setContactSettings(getContactSettings());
-    }
+    setProducts(getProducts());
+    setContactSettings(getContactSettings());
   }, []);
 
 
 
-  const handleLogout = () => {
-    logoutAdmin();
-    setAuthenticated(false);
-  };
+
 
   const resetForm = () => {
     setFormData({
@@ -170,11 +156,7 @@ const Admin = () => {
     resetForm();
   };
 
-  if (authenticated === null) return null;
 
-  if (!authenticated) {
-    return <Navigate to="/auth" state={{ mode: 'login' }} replace />;
-  }
 
   return (
     <main className="pt-24 pb-20 min-h-screen bg-muted">
@@ -197,12 +179,7 @@ const Admin = () => {
                 Add Product
               </button>
             )}
-            <button
-              onClick={handleLogout}
-              className="p-3 bg-background border border-border hover:border-destructive hover:text-destructive transition-colors"
-            >
-              <LogOut size={18} />
-            </button>
+
           </div>
         </div>
 
