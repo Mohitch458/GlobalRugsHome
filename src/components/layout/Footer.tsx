@@ -107,6 +107,24 @@ const Footer = () => {
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.367 18.592 0 12.017 0z"/></svg>
               </a>
               <a
+                href="https://www.amazon.com/s?ie=UTF8&marketplaceID=ATVPDKIKX0DER&me=A2Y0L8AKTLT1LI"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-transparent border border-ivory/30 flex items-center justify-center hover:bg-gold hover:border-gold hover:text-charcoal transition-all duration-300 hover:shadow-gold"
+                aria-label="Amazon Store"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12.002 2C6.48 2 2 6.48 2 12s4.48 10 10.002 10c5.52 0 10-4.48 10-10s-4.48-10-10-10zm2.25 14.28c-.85.34-1.74.52-2.65.52-1.92 0-3.35-1.03-3.35-3.07 0-2.45 1.93-3.31 4.54-3.31.25 0 .5.01.74.03v-.35c0-.82-.44-1.32-1.39-1.32-.9 0-1.84.34-2.53.86l-.68-1.28c.95-.71 2.37-1.12 3.73-1.12 2.45 0 3.37 1.28 3.37 3.42v3.7c0 .76.22 1.09.48 1.34v.26h-2.28c-.14-.26-.24-.65-.24-.97-.56.78-1.5 1.28-2.77 1.28zm.72-3.83c-.22-.02-.45-.03-.68-.03-1.46 0-2.54.27-2.54 1.54 0 .76.5 1.15 1.21 1.15 1.14 0 1.83-.71 2.01-1.74v-.92z"/></svg>
+              </a>
+              <a
+                href="https://globalrughome.etsy.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-transparent border border-ivory/30 flex items-center justify-center hover:bg-gold hover:border-gold hover:text-charcoal transition-all duration-300 hover:shadow-gold"
+                aria-label="Etsy Shop"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm3.77 13.06c0 .35-.14.68-.4.92s-.6.37-.96.37H9.59c-.36 0-.7-.13-.96-.37a1.275 1.275 0 0 1-.4-.92V8.94c0-.35.14-.68.4-.92.26-.24.6-.37.96-.37h4.82c.36 0 .7.13.96.37.26.24.4.57.4.92v1.17h-1.5V9.44h-3.32v1.78h2.57v1.5h-2.57v1.89h3.32v-1.06h1.5v1.06z"/></svg>
+              </a>
+              <a
                 href="#"
                 className="w-10 h-10 rounded-full bg-transparent border border-ivory/30 flex items-center justify-center hover:bg-gold hover:border-gold hover:text-charcoal transition-all duration-300 hover:shadow-gold"
                 aria-label="Facebook"
