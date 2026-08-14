@@ -97,7 +97,7 @@ Available Sizes & Pricing:
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-          <BrowserRouter basename="/GlobalRugsHome">
+          <BrowserRouter>
             <ScrollToTop />
             <Navbar />
             <Routes>
